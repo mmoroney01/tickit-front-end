@@ -6,13 +6,24 @@
 
 import React, { Component } from 'react';
 
-import { AppRegistry, Text, View } from 'react-native';
+import { AppRegistry, Text, View, TouchableOpacity } from 'react-native';
 import { styles, mapStyles } from './components/style_sheets/default_map_style';
-import { MapViews } from './components/map/default_map';
 
 export default class Tickit extends Component {
   render() {
-    return <Text> hey </Text>;
+    return (
+      <View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={[styles.bubble, styles.button]}>
+            <Text> Login </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={[styles.bubble, styles.button]}>
+            <Text> Register </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
   }
 }
 

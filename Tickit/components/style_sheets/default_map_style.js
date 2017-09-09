@@ -20,6 +20,11 @@ export const mapStyles = StyleSheet.create({
 });
 
 export const styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    marginVertical: 20,
+    backgroundColor: 'transparent'
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
