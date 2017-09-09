@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 
 import { AppRegistry, Text, View, TouchableOpacity } from 'react-native';
 import Login from './src/pages/Login';
+import Registration from './src/pages/Registration';
 import { styles, mapStyles } from './components/style_sheets/default_map_style';
 
 export default class Tickit extends Component {
@@ -30,6 +31,7 @@ export default class Tickit extends Component {
     return (
       <View>
         <Login />
+        <Registration />
       </View>
     );
   }
