@@ -20,6 +20,11 @@ export const mapStyles = StyleSheet.create({
 });
 
 export const styles = StyleSheet.create({
+  scroll: {
+    backgroundColor: '#E1D7D8',
+    padding: 30,
+    flexDirection: 'column'
+  },
   buttonContainer: {
     flexDirection: 'row',
     marginVertical: 20,

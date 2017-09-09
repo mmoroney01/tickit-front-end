@@ -7,21 +7,29 @@
 import React, { Component } from 'react';
 
 import { AppRegistry, Text, View, TouchableOpacity } from 'react-native';
+import Login from './src/pages/Login';
 import { styles, mapStyles } from './components/style_sheets/default_map_style';
 
 export default class Tickit extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onPressRegister = this.onPressRegister.bind(this);
+  }
+
+  onPressRegister() {
+    console.log('yo');
+    return (
+      <View>
+        <Text> yo </Text>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.bubble, styles.button]}>
-            <Text> Login </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={[styles.bubble, styles.button]}>
-            <Text> Register </Text>
-          </TouchableOpacity>
-        </View>
+        <Login />
       </View>
     );
   }
