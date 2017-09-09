@@ -5,23 +5,14 @@
  */
 
 import React, { Component } from 'react';
-import MapView from 'react-native-maps';
+
 import { AppRegistry, Text, View } from 'react-native';
 import { styles, mapStyles } from './components/style_sheets/default_map_style';
+import { MapViews } from './components/map/default_map';
 
 export default class Tickit extends Component {
   render() {
-    return (
-      <MapView
-        style={mapStyles.map}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }}
-      />
-    );
+    return <Text> hey </Text>;
   }
 }
 
