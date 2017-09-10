@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import MapView, { MAP_TYPES } from 'react-native-maps';
-import { Alert, AppRegistry, StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
+import { Alert, AppRegistry, StyleSheet, Text, Image, View, Dimensions, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
+import Fontawesomeicons from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -11,11 +14,11 @@ class DisplayLatLng extends React.Component {
 
     this.state = {
       region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      },
+            latitude: 41.87625540000001,
+            longitude: -87.65306249999998,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          },
       startingLatitude: 37.78825,
       startingLongitude: -122.4324
     };
@@ -30,12 +33,18 @@ class DisplayLatLng extends React.Component {
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        var initialPosition = JSON.stringify(position);
-        this.setState({initialPosition});
+        var initialPosition = position;
+        console.log(initialPosition);
+        console.log(this.state.region);
+        console.log(initialPosition.coords.latitude)
+        this.setState({ region: { latitude: initialPosition.coords.latitude, longitude: initialPosition.coords.longitude }});
       },
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
+
+    console.log(this.state.region);
+
     this.watchID = navigator.geolocation.watchPosition((position) => {
     var lastPosition = JSON.stringify(position);
     this.setState({lastPosition});
@@ -77,18 +86,30 @@ class DisplayLatLng extends React.Component {
       <View style={styles.container}>
 
         <MapView
+          showsUserLocation={true}
+          showsMyLocationButton={true}
+          followsUserLocation={true}
+          showsTraffic={true}
           provider={this.props.provider}
           ref={ref => { this.map = ref; }}
           mapType={MAP_TYPES.HYBRID}
           style={styles.map}
-          initialRegion={this.state.region}
+          initialRegion={{
+            latitude: 41.87625540000001,
+            longitude: -87.65306249999998,
+            latitudeDelta:  0.0922,
+            longitudeDelta: 0.0421
+          }}
           onRegionChange={region => this.onRegionChange(region)}
         >
-          <MapView.Marker
-          coordinate={{latitude: this.state.region.latitude, longitude: this.state.region.longitude}}
-          pinColor={'red'}
-          style={markerStyles.mapMarker}/>
         </MapView>
+
+        <View pointerEvents="none" style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
+            <Icon
+            pointerEvents="none"
+            name='rowing'/>
+        </View>
+
 
         <View style={styles.buttonContainer}>
 
