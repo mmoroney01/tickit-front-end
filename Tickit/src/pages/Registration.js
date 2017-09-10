@@ -9,29 +9,36 @@ export default class Registration extends Component {
     super(props);
 
     this.state = {
-      username: '',
-      password: ''
+      username: 'dan12',
+      email: 'dan12@dan.com',
+      password: '123'
     };
   }
 
-  signInPress() {
+  registerPress() {
     console.log(this.state.username);
     console.log(this.state.password);
-    fetch('http://tickit-back-end.herokuapp.com/', {
+    console.log(this.state.email);
+    fetch('https://tickit-back-end.herokuapp.com/users', {
       method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
+        email: this.state.email,
         username: this.state.username,
         password: this.state.password
       })
     })
       .then(response => response.json())
       .then(responseData => {
-        AlertIOS.alert('Login Success!', 'Cluck the button to get a Chick Norris Quite!');
+        console.log(responseData);
       })
       .done();
   }
 
-  cancelPress() {
+  cancelRegisterPress() {
     console.log('cancelled mfer');
   }
 
@@ -40,7 +47,11 @@ export default class Registration extends Component {
       <ScrollView style={styles.scroll}>
         <Container>
           <Label text="Registration" />
-          <TextInput style={styles.textInput} onChangeText={text => this.setState({ username: text })} />
+          <TextInput
+            autocapitalize="none"
+            style={styles.textInput}
+            onChangeText={text => this.setState({ username: text })}
+          />
         </Container>
         <Container>
           <Label text="Password" />
@@ -53,13 +64,17 @@ export default class Registration extends Component {
         <View style={styles.footer}>
           <Container>
             <Button
-              label="Sign In"
+              label="Register"
               styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
-              onPress={this.signInPress.bind(this)}
+              onPress={this.registerPress.bind(this)}
             />
           </Container>
           <Container>
-            <Button label="CANCEL" styles={{ label: styles.buttonBlackText }} onPress={this.cancelPress.bind(this)} />
+            <Button
+              label="CANCEL"
+              styles={{ label: styles.buttonBlackText }}
+              onPress={this.cancelRegisterPress.bind(this)}
+            />
           </Container>
         </View>
       </ScrollView>

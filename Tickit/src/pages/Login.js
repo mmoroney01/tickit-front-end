@@ -35,7 +35,7 @@ export default class Login extends Component {
       .done();
   }
 
-  cancelPress() {
+  cancelLoginPress() {
     console.log('cancelled mfer');
   }
 
@@ -44,7 +44,11 @@ export default class Login extends Component {
       <ScrollView style={styles.scroll}>
         <Container>
           <Label text="Email" />
-          <TextInput style={styles.textInput} onChangeText={text => this.setState({ email: text })} />
+          <TextInput
+            autocapitalize="false"
+            style={styles.textInput}
+            onChangeText={text => this.setState({ email: text })}
+          />
         </Container>
         <Container>
           <Label text="Password" />
@@ -63,7 +67,11 @@ export default class Login extends Component {
             />
           </Container>
           <Container>
-            <Button label="CANCEL" styles={{ label: styles.buttonBlackText }} onPress={this.cancelPress.bind(this)} />
+            <Button
+              label="CANCEL"
+              styles={{ label: styles.buttonBlackText }}
+              onPress={this.cancelLoginPress.bind(this)}
+            />
           </Container>
         </View>
       </ScrollView>
