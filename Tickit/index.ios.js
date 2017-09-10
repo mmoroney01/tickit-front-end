@@ -5,11 +5,10 @@
  */
 
 import React, { Component } from 'react';
-
 import { AppRegistry, Text, View, TouchableOpacity } from 'react-native';
 import Login from './src/pages/Login';
 import Registration from './src/pages/Registration';
-import { styles, mapStyles } from './components/style_sheets/default_map_style';
+import DefaultMap from './src/pages/default_map';
 
 export default class Tickit extends Component {
   constructor(props) {
@@ -31,7 +30,7 @@ export default class Tickit extends Component {
     if (2 != 2) {
       return <Login />;
     } else {
-      return <Registration />;
+      return <DefaultMap />;
     }
   }
 }
