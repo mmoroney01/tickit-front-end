@@ -16,8 +16,11 @@ class DisplayLatLng extends React.Component {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
+      startingLatitude: 37.78825,
+      startingLongitude: -122.4324
     };
     this.onSubmitPressed = this.onSubmitPressed.bind(this);
+    this.onFindPressed = this.onFindPressed.bind(this);
   }
 
   onRegionChange(region) {
@@ -57,6 +60,18 @@ class DisplayLatLng extends React.Component {
       })
   }
 
+  onFindPressed() {
+    const newLatitude = this.state.startingLatitude;
+    const newLongitude = this.state.startingLongitude;
+
+    this.setState({
+      region: {
+        latitude: this.state.startingLatitude,
+        longitude: this.state.startingLongitude
+      }
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -76,6 +91,13 @@ class DisplayLatLng extends React.Component {
         </MapView>
 
         <View style={styles.buttonContainer}>
+
+            <TouchableOpacity
+              onPress={this.onFindPressed}
+              style={[styles.bubble, styles.button]}>
+              <Text style={styles.buttonText}>Find Your Location</Text>
+            </TouchableOpacity>
+
             <TouchableOpacity
               onPress={async () => this.onSubmitPressed()}
               style={[styles.bubble, styles.button]}
