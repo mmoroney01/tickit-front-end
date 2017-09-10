@@ -34,7 +34,7 @@ export default class Tickit extends Component {
     if (2 != 2) {
       return <Login />;
     } else {
-      return <DisplayLatLng />;
+      return <DisplayWithPin />;
     }
   }
 }
