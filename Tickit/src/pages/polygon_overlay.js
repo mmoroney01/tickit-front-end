@@ -45,91 +45,13 @@ class PolygonCreator extends React.Component {
     };
   }
 
-  finish() {
-    const { polygons, editing } = this.state;
-    this.setState({
-      polygons: [...polygons, editing],
-      editing: null,
-      creatingHole: false
-    });
-  }
-
-  createHole() {
-    const { editing, creatingHole } = this.state;
-    if (!creatingHole) {
-      this.setState({
-        creatingHole: true,
-        editing: {
-          ...editing,
-          holes: [...editing.holes, []]
-        }
-      });
-    } else {
-      const holes = [...editing.holes];
-      if (holes[holes.length - 1].length === 0) {
-        holes.pop();
-        this.setState({
-          editing: {
-            ...editing,
-            holes
-          }
-        });
-      }
-      this.setState({ creatingHole: false });
-    }
-  }
-
-  onPress(e) {
-    const { editing, creatingHole } = this.state;
-    if (!editing) {
-      this.setState({
-        editing: {
-          id: id++,
-          coordinates: [e.nativeEvent.coordinate],
-          holes: []
-        }
-      });
-    } else if (!creatingHole) {
-      this.setState({
-        editing: {
-          ...editing,
-          coordinates: [...editing.coordinates, e.nativeEvent.coordinate]
-        }
-      });
-    } else {
-      const holes = [...editing.holes];
-      holes[holes.length - 1] = [...holes[holes.length - 1], e.nativeEvent.coordinate];
-      this.setState({
-        editing: {
-          ...editing,
-          id: id++, // keep incrementing id to trigger display refresh
-          coordinates: [...editing.coordinates],
-          holes
-        }
-      });
-    }
-  }
-
   render() {
     const mapOptions = {
       scrollEnabled: true
     };
-
-    if (this.state.editing) {
-      mapOptions.scrollEnabled = false;
-      mapOptions.onPanDrag = e => this.onPress(e);
-    }
-
     return (
       <View style={styles.container}>
-        <MapView
-          provider={this.props.provider}
-          style={styles.map}
-          mapType={MapView.MAP_TYPES.HYBRID}
-          initialRegion={this.state.region}
-          onPress={e => this.onPress(e)}
-          {...mapOptions}
-        >
+        <MapView style={styles.map} mapType={MapView.MAP_TYPES.HYBRID} initialRegion={this.state.region}>
           <MapView.Polygon
             coordinates={this.state.polygons}
             strokeColor="#F00"
@@ -154,27 +76,6 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject
-  },
-  bubble: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20
-  },
-  latlng: {
-    width: 200,
-    alignItems: 'stretch'
-  },
-  button: {
-    width: 80,
-    paddingHorizontal: 12,
-    alignItems: 'center',
-    marginHorizontal: 10
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginVertical: 20,
-    backgroundColor: 'transparent'
   }
 });
 
