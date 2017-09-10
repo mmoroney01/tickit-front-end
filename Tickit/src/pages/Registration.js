@@ -48,7 +48,7 @@ export default class Registration extends Component {
         <Container>
           <Label text="Registration" />
           <TextInput
-            autocapitalize="none"
+            autoCapitalize("none")
             style={styles.textInput}
             onChangeText={text => this.setState({ username: text })}
           />

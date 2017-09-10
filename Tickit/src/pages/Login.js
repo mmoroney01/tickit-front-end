@@ -9,8 +9,8 @@ export default class Login extends Component {
     super(props);
 
     this.state = {
-      email: 'admin@example.com',
-      password: 'password'
+      email: '',
+      password: ''
     };
   }
 
@@ -45,7 +45,7 @@ export default class Login extends Component {
         <Container>
           <Label text="Email" />
           <TextInput
-            autocapitalize="none"
+            autoCapitalize("none")
             style={styles.textInput}
             onChangeText={text => this.setState({ email: text })}
           />

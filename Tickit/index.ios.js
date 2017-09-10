@@ -28,7 +28,7 @@ export default class Tickit extends Component {
   }
 
   render() {
-    if (2 != 2) {
+    if (2 == 2) {
       return <Login />;
     } else {
       return <Registration />;
