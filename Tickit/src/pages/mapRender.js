@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import MapView, { MAP_TYPES } from 'react-native-maps';
-import { Alert, AppRegistry, StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
+import { Alert, AppRegistry, StyleSheet, Text, Image, View, Dimensions, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
+import Fontawesomeicons from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -77,6 +80,9 @@ class DisplayLatLng extends React.Component {
       <View style={styles.container}>
 
         <MapView
+          showsUserLocation={true}
+
+          showsTraffic={true}
           provider={this.props.provider}
           ref={ref => { this.map = ref; }}
           mapType={MAP_TYPES.HYBRID}
@@ -84,11 +90,20 @@ class DisplayLatLng extends React.Component {
           initialRegion={this.state.region}
           onRegionChange={region => this.onRegionChange(region)}
         >
-          <MapView.Marker
+        <MapView.Marker
           coordinate={{latitude: this.state.region.latitude, longitude: this.state.region.longitude}}
           pinColor={'red'}
+          centerOffset={{x: 0, y: 0}}
           style={markerStyles.mapMarker}/>
+
         </MapView>
+
+        <View pointerEvents="none" style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
+            <Icon
+            pointerEvents="none"
+            name='rowing'/>
+        </View>
+
 
         <View style={styles.buttonContainer}>
 

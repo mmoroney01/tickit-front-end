@@ -5,7 +5,10 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, TouchableOpacity } from 'react-native';
+import { AppRegistry, Text, View, TouchableOpacity, Image } from 'react-native';
+import { Icon } from 'react-native-elements';
+import Fontawesomeicons from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Login from './src/pages/Login';
 import Registration from './src/pages/Registration';
 import DefaultMap from './src/pages/default_map';
@@ -34,7 +37,7 @@ export default class Tickit extends Component {
     if (2 != 2) {
       return <Login />;
     } else {
-      return <DisplayWithPin />;
+      return <DisplayLatLng />;
     }
   }
 }
