@@ -45,8 +45,8 @@ export default class Login extends Component {
         <Container>
           <Label text="Email" />
           <TextInput
-            autoCapitalize("none")
             style={styles.textInput}
+            autoCapitalize="none"
             onChangeText={text => this.setState({ email: text })}
           />
         </Container>

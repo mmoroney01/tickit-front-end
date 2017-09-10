@@ -9,9 +9,10 @@ export default class Registration extends Component {
     super(props);
 
     this.state = {
-      username: 'dan12',
-      email: 'dan12@dan.com',
-      password: '123'
+      username: '',
+      email: '',
+      password: '',
+      plate_number: ''
     };
   }
 
@@ -26,9 +27,10 @@ export default class Registration extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: this.state.email,
         username: this.state.username,
-        password: this.state.password
+        email: this.state.email,
+        password: this.state.password,
+        plate_number: this.state.plate_number
       })
     })
       .then(response => response.json())
@@ -46,11 +48,19 @@ export default class Registration extends Component {
     return (
       <ScrollView style={styles.scroll}>
         <Container>
-          <Label text="Registration" />
+          <Label text="User Name" />
           <TextInput
-            autoCapitalize("none")
             style={styles.textInput}
+            autoCapitalize="none"
             onChangeText={text => this.setState({ username: text })}
+          />
+        </Container>
+        <Container>
+          <Label text="Email" />
+          <TextInput
+            autoCapitalize="none"
+            style={styles.textInput}
+            onChangeText={text => this.setState({ email: text })}
           />
         </Container>
         <Container>
@@ -59,6 +69,14 @@ export default class Registration extends Component {
             secureTextEntry={true}
             style={styles.textInput}
             onChangeText={text => this.setState({ password: text })}
+          />
+        </Container>
+        <Container>
+          <Label text="Plate Number" />
+          <TextInput
+            autoCapitalize="none"
+            style={styles.textInput}
+            onChangeText={text => this.setState({ plate_number: text })}
           />
         </Container>
         <View style={styles.footer}>
@@ -98,8 +116,8 @@ const styles = StyleSheet.create({
     marginTop: 100
   },
   textInput: {
-    height: 80,
-    fontSize: 30,
+    height: 60,
+    fontSize: 20,
     backgroundColor: '#FFF'
   },
   scroll: {
