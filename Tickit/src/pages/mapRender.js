@@ -102,12 +102,6 @@ class DisplayLatLng extends React.Component {
           }}
           onRegionChange={region => this.onRegionChange(region)}
         >
-        <MapView.Marker
-          coordinate={{latitude: this.state.region.latitude, longitude: this.state.region.longitude}}
-          pinColor={'red'}
-          centerOffset={{x: 0, y: 0}}
-          style={markerStyles.mapMarker}/>
-
         </MapView>
 
         <View pointerEvents="none" style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
