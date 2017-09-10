@@ -9,6 +9,7 @@ import { AppRegistry, Text, View, TouchableOpacity } from 'react-native';
 import Login from './src/pages/Login';
 import Registration from './src/pages/Registration';
 import DefaultMap from './src/pages/default_map';
+import PolygonMap from './src/pages/polygon_overlay';
 
 export default class Tickit extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ export default class Tickit extends Component {
     if (2 != 2) {
       return <Login />;
     } else {
-      return <DefaultMap />;
+      return <PolygonMap />;
     }
   }
 }
