@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MapView, { MAP_TYPES } from 'react-native-maps';
 import { Alert, AppRegistry, StyleSheet, Text, View, Dimensions, TouchableOpacity, TouchableHighlight } from 'react-native';
-import isEqual from 'lodash/isEqual';
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -337,5 +336,6 @@ export default class Tickit extends Component {
   }
 }
 
-AppRegistry.registerComponent('Tickit', () => DisplayLatLng);
+module.exports = DisplayLatLng;
+module.exports = DisplayWithPin;
 
