@@ -5,61 +5,35 @@
  */
 
 import React, { Component } from 'react';
-import MapView from 'react-native-maps';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 
-const mapStyles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
-  }
-});
+import { AppRegistry, Text, View, TouchableOpacity } from 'react-native';
+import Login from './src/pages/Login';
+import Registration from './src/pages/Registration';
+import { styles, mapStyles } from './components/style_sheets/default_map_style';
 
 export default class Tickit extends Component {
-  render() {
+  constructor(props) {
+    super(props);
+
+    this.onPressRegister = this.onPressRegister.bind(this);
+  }
+
+  onPressRegister() {
+    console.log('yo');
     return (
-      <MapView
-        style={mapStyles.map}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }}
-      />
+      <View>
+        <Text> yo </Text>
+      </View>
     );
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
+  render() {
+    if (2 != 2) {
+      return <Login />;
+    } else {
+      return <Registration />;
+    }
   }
-});
+}
 
 AppRegistry.registerComponent('Tickit', () => Tickit);
