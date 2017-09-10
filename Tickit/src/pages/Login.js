@@ -45,7 +45,7 @@ export default class Login extends Component {
         <Container>
           <Label text="Email" />
           <TextInput
-            autocapitalize="false"
+            autocapitalize="none"
             style={styles.textInput}
             onChangeText={text => this.setState({ email: text })}
           />
