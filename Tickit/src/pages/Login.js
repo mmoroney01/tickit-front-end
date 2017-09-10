@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, AlertIOS } from 'react-native';
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
@@ -9,24 +9,28 @@ export default class Login extends Component {
     super(props);
 
     this.state = {
-      username: '',
-      password: ''
+      email: 'admin@example.com',
+      password: 'password'
     };
   }
 
   signInPress() {
     console.log(this.state.username);
     console.log(this.state.password);
-    fetch('http://tickit-back-end.herokuapp.com/', {
+    fetch('https://tickit-back-end.herokuapp.com/users/login', {
       method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
-        username: this.state.username,
+        email: this.state.email,
         password: this.state.password
       })
     })
       .then(response => response.json())
       .then(responseData => {
-        AlertIOS.alert('Login Success!', 'Cluck the button to get a Chick Norris Quite!');
+        console.log(responseData);
       })
       .done();
   }
@@ -39,8 +43,8 @@ export default class Login extends Component {
     return (
       <ScrollView style={styles.scroll}>
         <Container>
-          <Label text="Username or Email" />
-          <TextInput style={styles.textInput} onChangeText={text => this.setState({ username: text })} />
+          <Label text="Email" />
+          <TextInput style={styles.textInput} onChangeText={text => this.setState({ email: text })} />
         </Container>
         <Container>
           <Label text="Password" />

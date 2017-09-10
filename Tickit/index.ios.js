@@ -28,12 +28,11 @@ export default class Tickit extends Component {
   }
 
   render() {
-    return (
-      <View>
-        <Login />
-        <Registration />
-      </View>
-    );
+    if (2 == 2) {
+      return <Login />;
+    } else {
+      return <Registration />;
+    }
   }
 }
 
