@@ -17,25 +17,10 @@ import DisplayWithPin from './src/pages/mapRender';
 export default class Tickit extends Component {
   constructor(props) {
     super(props);
-
-    this.onPressRegister = this.onPressRegister.bind(this);
-  }
-
-  onPressRegister() {
-    console.log('yo');
-    return (
-      <View>
-        <Text> yo </Text>
-      </View>
-    );
   }
 
   render() {
-    if (2 != 2) {
-      return <Login />;
-    } else {
-      return <DisplayLatLng />;
-    }
+    return <DisplayLatLng />;
   }
 }
 

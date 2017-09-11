@@ -17,9 +17,11 @@ import {
 import { Icon } from 'react-native-elements';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 import NavigationBar from 'react-native-navbar';
-import Login from './Login';
 
-class DisplayLatLng extends React.Component {
+import Login from './Login';
+import Registration from './Registration';
+
+export default class DisplayLatLng extends React.Component {
   constructor(props) {
     super(props);
 
@@ -123,6 +125,11 @@ class DisplayLatLng extends React.Component {
   }
 
   render() {
+      if(this.state.register === true){
+        return(
+          <Registration/>
+        );
+      }
       if(this.state.login === true){
         return (
           <Login />

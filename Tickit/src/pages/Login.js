@@ -12,7 +12,7 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      cancelled: false
+      loginCancelled: false
     };
   }
 
@@ -37,13 +37,13 @@ export default class Login extends Component {
 
   cancelLoginPress() {
     this.setState({
-      cancelled: true
+      loginCancelled: true
     });
   }
 
   render() {
-    if (this.state.cancelled === false){
-      return (
+    if (this.state.loginCancelled === false){
+      return(
         <ScrollView style={styles.scroll}>
           <Container>
             <Label text="Email" />
@@ -80,7 +80,8 @@ export default class Login extends Component {
         </ScrollView>
       );
    }
-    if(this.state.cancelled === true){
+
+    if(this.state.loginCancelled === true){
       return <DisplayLatLng />;
     }
   }
