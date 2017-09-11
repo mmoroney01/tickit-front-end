@@ -40,7 +40,6 @@ class DisplayLatLng extends React.Component {
       dateWheel: false
     };
     this.onSubmitPressed = this.onSubmitPressed.bind(this);
-    this.onFindPressed = this.onFindPressed.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
     this.onDatePressed = this.onDatePressed.bind(this);
   }
@@ -109,18 +108,6 @@ class DisplayLatLng extends React.Component {
     })
   }
 
-  onFindPressed() {
-    const newLatitude = this.state.startingLatitude;
-    const newLongitude = this.state.startingLongitude;
-
-    this.setState({
-      region: {
-        latitude: this.state.startingLatitude,
-        longitude: this.state.startingLongitude
-      }
-    });
-  }
-
   render() {
       if(this.state.dateWheel === true){
       return (
@@ -163,17 +150,6 @@ class DisplayLatLng extends React.Component {
             timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
             onDateChange={this.onDateChange}
           />
-        </View>
-
-        <View>
-          <WithLabel>
-            <Text
-            style={buttonStyles.dateLabel}>{
-              this.state.date.toLocaleDateString() +
-              ' ' +
-              this.state.date.toLocaleTimeString()
-            }</Text>
-          </WithLabel>
         </View>
 
           <View style={styles.buttonContainer}>
