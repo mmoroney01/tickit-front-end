@@ -24,11 +24,13 @@ class DisplayLatLng extends React.Component {
       startingLatitude: 37.78825,
       startingLongitude: -122.4324,
       date: new Date(),
-      timeZoneOffsetInHours: (-1) * (new Date()).getTimezoneOffset() / 60
+      timeZoneOffsetInHours: (-1) * (new Date()).getTimezoneOffset() / 60,
+      dateWheel: false
     };
     this.onSubmitPressed = this.onSubmitPressed.bind(this);
     this.onFindPressed = this.onFindPressed.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
+    this.onDatePressed = this.onDatePressed.bind(this);
   }
 
   onRegionChange(region) {
@@ -65,6 +67,9 @@ class DisplayLatLng extends React.Component {
   }
 
   onSubmitPressed() {
+    this.setState({
+      dateWheel: false
+    })
     fetch('https://tickit-back-end.herokuapp.com/parking_helper', {
       method: 'POST',
       headers: {
@@ -84,6 +89,12 @@ class DisplayLatLng extends React.Component {
       .done();
   }
 
+  onDatePressed() {
+    this.setState({
+      dateWheel: true
+    })
+  }
+
   onFindPressed() {
     const newLatitude = this.state.startingLatitude;
     const newLongitude = this.state.startingLongitude;
@@ -97,66 +108,127 @@ class DisplayLatLng extends React.Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <MapView
-          showsUserLocation={true}
-          showsMyLocationButton={true}
-          showsTraffic={true}
-          provider={this.props.provider}
-          ref={ref => { this.map = ref; }}
-          mapType={MAP_TYPES.HYBRID}
-          style={styles.map}
-          initialRegion={{
-            latitude: 41.87625540000001,
-            longitude: -87.65306249999998,
-            latitudeDelta:  0.0922,
-            longitudeDelta: 0.0421
-          }}
-          onRegionChange={region => this.onRegionChange(region)}
-        >
-        </MapView>
+      if(this.state.dateWheel === true){
+      return (
+        <View style={styles.container}>
+          <MapView
+            showsUserLocation={true}
+            showsMyLocationButton={true}
+            showsTraffic={true}
+            provider={this.props.provider}
+            ref={ref => { this.map = ref; }}
+            mapType={MAP_TYPES.HYBRID}
+            style={styles.map}
+            initialRegion={{
+              latitude: 41.87625540000001,
+              longitude: -87.65306249999998,
+              latitudeDelta:  0.0922,
+              longitudeDelta: 0.0421
+            }}
+            onRegionChange={region => this.onRegionChange(region)}
+          >
+          </MapView>
 
-        <View pointerEvents="none" style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
-            <Icon
-            pointerEvents="none"
-            name='rowing'/>
+          <View pointerEvents="none" style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
+              <Icon
+              pointerEvents="none"
+              name='rowing'/>
+          </View>
+
+        <View>
+          <DatePickerIOS
+            date={this.state.date}
+            mode="date"
+            style={buttonStyles.DatePickerIOS}
+            timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
+            onDateChange={this.onDateChange}
+          />
         </View>
 
         <View>
-        <DatePickerIOS
-          date={this.state.date}
-          mode="date"
-          style={buttonStyles.DatePickerIOS}
-          timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
-          onDateChange={this.onDateChange}
-        />
-      </View>
-
-      <View>
-        <WithLabel>
-          <Text
-          style={buttonStyles.dateLabel}>{
-            this.state.date.toLocaleDateString() +
-            ' ' +
-            this.state.date.toLocaleTimeString()
-          }</Text>
-        </WithLabel>
-      </View>
-
-        <View style={styles.buttonContainer}>
-
-
-            <TouchableOpacity
-              onPress={async () => this.onSubmitPressed()}
-              style={[styles.bubble, styles.button]}
-            >
-              <Text style={styles.buttonText}>Submit Location</Text>
-            </TouchableOpacity>
-
+          <WithLabel>
+            <Text
+            style={buttonStyles.dateLabel}>{
+              this.state.date.toLocaleDateString() +
+              ' ' +
+              this.state.date.toLocaleTimeString()
+            }</Text>
+          </WithLabel>
         </View>
-      </View>
-    );
+
+          <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                onPress={async () => this.onSubmitPressed()}
+                style={[styles.bubble, styles.button]}
+              >
+                <Text style={styles.buttonText}>Submit Location</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={async () => this.onDatePressed()}
+                style={[styles.bubble, styles.button]}
+              >
+                <Text style={styles.buttonText}>Set Date</Text>
+              </TouchableOpacity>
+          </View>
+        </View>
+      );
+    } else {
+      return(
+        <View style={styles.container}>
+          <MapView
+            showsUserLocation={true}
+            showsMyLocationButton={true}
+            showsTraffic={true}
+            provider={this.props.provider}
+            ref={ref => { this.map = ref; }}
+            mapType={MAP_TYPES.HYBRID}
+            style={styles.map}
+            initialRegion={{
+              latitude: 41.87625540000001,
+              longitude: -87.65306249999998,
+              latitudeDelta:  0.0922,
+              longitudeDelta: 0.0421
+            }}
+            onRegionChange={region => this.onRegionChange(region)}
+          >
+          </MapView>
+
+          <View pointerEvents="none" style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
+              <Icon
+              pointerEvents="none"
+              name='rowing'/>
+          </View>
+
+        <View>
+          <WithLabel>
+            <Text
+            style={buttonStyles.dateLabel}>{
+              this.state.date.toLocaleDateString() +
+              ' ' +
+              this.state.date.toLocaleTimeString()
+            }</Text>
+          </WithLabel>
+        </View>
+
+          <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                onPress={async () => this.onSubmitPressed()}
+                style={[styles.bubble, styles.button]}
+              >
+                <Text style={styles.buttonText}>Submit Location</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={async () => this.onDatePressed()}
+                style={[styles.bubble, styles.button]}
+              >
+                <Text style={styles.buttonText}>Set Date</Text>
+              </TouchableOpacity>
+          </View>
+        </View>
+      );
+    }
   }
 }
 
