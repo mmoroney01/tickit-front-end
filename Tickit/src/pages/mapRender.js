@@ -36,7 +36,7 @@ export default class DisplayLatLng extends React.Component {
       startingLongitude: -122.4324,
       polygons: [],
       date: new Date(),
-      timeZoneOffsetInHours: (-1) * (new Date()).getTimezoneOffset() / 60,
+      timeZoneOffsetInHours: -1 * new Date().getTimezoneOffset() / 60,
       dateWheel: false,
       login: false,
       register: false
@@ -48,13 +48,13 @@ export default class DisplayLatLng extends React.Component {
     this.onRegisterPressed = this.onRegisterPressed.bind(this);
   }
 
-  onLoginPressed(){
+  onLoginPressed() {
     this.setState({
       login: true
     });
   }
 
-  onRegisterPressed(){
+  onRegisterPressed() {
     this.setState({
       register: true
     });
@@ -125,103 +125,24 @@ export default class DisplayLatLng extends React.Component {
   }
 
   render() {
-      if(this.state.register === true){
-        return(
-          <Registration/>
-        );
-      }
-      if(this.state.login === true){
-        return (
-          <Login />
-        );
-      }
-
-      if(this.state.dateWheel === true){
-        return (
-          <View style={styles.mapContainer}>
-            <MapView
-              showsUserLocation={true}
-              showsMyLocationButton={true}
-              showsTraffic={true}
-              provider={this.props.provider}
-              ref={ref => { this.map = ref; }}
-              style={styles.map}
-              initialRegion={{
-                latitude: 41.87625540000001,
-                longitude: -87.65306249999998,
-                latitudeDelta:  0.0922,
-                longitudeDelta: 0.0421
-              }}
-              onRegionChange={region => this.onRegionChange(region)}
-            >
-            <MapView.Polygon
-              coordinates={this.state.polygons}
-              strokeColor="#F00"
-              fillColor="rgba(255,0,0,0.5)"
-              strokeWidth={1}
-            />
-            </MapView>
-
-            <View
-            pointerEvents="none"
-            style={{
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'transparent'
-                }}
-              >
-            <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
-          </View>
-
-          <View style={styles.navContainer}>
-            <NavigationBar leftButton={{
-                title: 'Log In',
-                tintColor: "#F08080",
-                style: {marginVertical: 20},
-                handler: () => this.onLoginPressed(),
-              }} title={titleConfig}
-              rightButton={{
-                  title: 'Register',
-                  tintColor: "#F08080",
-                  style: {marginVertical: 20},
-                  handler: () => this.onRegisterPressed(),
-              }} />
-          </View>
-
-          <View>
-            <DatePickerIOS
-              date={this.state.date}
-              mode="date"
-              style={styles.DatePickerIOS}
-              timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
-              onDateChange={this.onDateChange}
-            />
-          </View>
-
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                  onPress={async () => this.onSubmitPressed()}
-                  style={[styles.bubble, styles.button]}
-                >
-                  <Text style={styles.buttonText}>Confirm Submission</Text>
-                </TouchableOpacity>
-            </View>
-          </View>
-        );
+    if (this.state.register === true) {
+      return <Registration />;
     }
-    if(this.state.dateWheel === false) {
-      return(
+    if (this.state.login === true) {
+      return <Login />;
+    }
+
+    if (this.state.dateWheel === true) {
+      return (
         <View style={styles.mapContainer}>
           <MapView
             showsUserLocation={true}
             showsMyLocationButton={true}
+            showsTraffic={true}
             provider={this.props.provider}
-            ref={ref => { this.map = ref; }}
+            ref={ref => {
+              this.map = ref;
+            }}
             style={styles.map}
             initialRegion={{
               latitude: 41.87625540000001,
@@ -256,18 +177,104 @@ export default class DisplayLatLng extends React.Component {
           </View>
 
           <View style={styles.navContainer}>
-            <NavigationBar leftButton={{
+            <NavigationBar
+              leftButton={{
                 title: 'Log In',
-                tintColor: "#F08080",
-                style: {marginVertical: 20},
-                handler: () => this.onLoginPressed(),
-              }} title={titleConfig}
+                tintColor: '#F08080',
+                style: { marginVertical: 20 },
+                handler: () => this.onLoginPressed()
+              }}
+              title={titleConfig}
               rightButton={{
-                  title: 'Register',
-                  tintColor: "#F08080",
-                  style: {marginVertical: 20},
-                  handler: () => this.onRegisterPressed(),
-              }} />
+                title: 'Register',
+                tintColor: '#F08080',
+                style: { marginVertical: 20 },
+                handler: () => this.onRegisterPressed()
+              }}
+            />
+          </View>
+
+          <View>
+            <DatePickerIOS
+              date={this.state.date}
+              mode="date"
+              style={styles.DatePickerIOS}
+              timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
+              onDateChange={this.onDateChange}
+            />
+          </View>
+
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  onPress={async () => this.onSubmitPressed()}
+                  style={[styles.bubble, styles.button]}
+                >
+                  <Text style={styles.buttonText}>Confirm Submission</Text>
+                </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      );
+    }
+    if (this.state.dateWheel === false) {
+      return (
+        <View style={styles.mapContainer}>
+          <MapView
+            showsUserLocation={true}
+            showsMyLocationButton={true}
+            provider={this.props.provider}
+            ref={ref => {
+              this.map = ref;
+            }}
+            style={styles.map}
+            initialRegion={{
+              latitude: 41.87625540000001,
+              longitude: -87.65306249999998,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421
+            }}
+            onRegionChange={region => this.onRegionChange(region)}
+          >
+            <MapView.Polygon
+              coordinates={this.state.polygons}
+              strokeColor="#F00"
+              fillColor="rgba(255,0,0,0.5)"
+              strokeWidth={1}
+            />
+          </MapView>
+
+          <View
+            pointerEvents="none"
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'transparent'
+            }}
+          >
+            <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
+          </View>
+
+          <View style={styles.navContainer}>
+            <NavigationBar
+              leftButton={{
+                title: 'Log In',
+                tintColor: '#F08080',
+                style: { marginVertical: 20 },
+                handler: () => this.onLoginPressed()
+              }}
+              title={titleConfig}
+              rightButton={{
+                title: 'Register',
+                tintColor: '#F08080',
+                style: { marginVertical: 20 },
+                handler: () => this.onRegisterPressed()
+              }}
+            />
           </View>
 
           <View style={styles.buttonContainer}>
@@ -283,7 +290,7 @@ export default class DisplayLatLng extends React.Component {
 
 const titleConfig = {
   marginVertical: 20,
-  title: 'Tickit'
+  title: 'Tick!t'
 };
 
 var Heading = React.createClass({
