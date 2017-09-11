@@ -102,7 +102,7 @@ class DisplayLatLng extends React.Component {
         <MapView
           showsUserLocation={true}
           showsMyLocationButton={true}
-          followsUserLocation={true}
+
           showsTraffic={true}
           provider={this.props.provider}
           ref={ref => { this.map = ref; }}
