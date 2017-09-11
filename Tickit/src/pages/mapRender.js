@@ -78,7 +78,8 @@ class DisplayLatLng extends React.Component {
       },
       body: JSON.stringify({
         latitude: this.state.region.latitude,
-        longitude: this.state.region.longitude
+        longitude: this.state.region.longitude,
+        date: this.state.date
       })
     })
       .then(response => response.json())
@@ -199,17 +200,6 @@ class DisplayLatLng extends React.Component {
               pointerEvents="none"
               name='rowing'/>
           </View>
-
-        <View>
-          <WithLabel>
-            <Text
-            style={buttonStyles.dateLabel}>{
-              this.state.date.toLocaleDateString() +
-              ' ' +
-              this.state.date.toLocaleTimeString()
-            }</Text>
-          </WithLabel>
-        </View>
 
           <View style={styles.buttonContainer}>
               <TouchableOpacity
