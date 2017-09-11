@@ -17,6 +17,7 @@ import {
 import { Icon } from 'react-native-elements';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 import NavigationBar from 'react-native-navbar';
+import Login from './Login';
 
 class DisplayLatLng extends React.Component {
   constructor(props) {
@@ -118,75 +119,81 @@ class DisplayLatLng extends React.Component {
   }
 
   render() {
+      if(this.state.login === true){
+        return (
+          <Login />
+        );
+      }
+
       if(this.state.dateWheel === true){
-      return (
-        <View style={styles.mapContainer}>
-          <MapView
-            showsUserLocation={true}
-            showsMyLocationButton={true}
-            showsTraffic={true}
-            provider={this.props.provider}
-            ref={ref => { this.map = ref; }}
-            mapType={MAP_TYPES.HYBRID}
-            style={styles.map}
-            initialRegion={{
-              latitude: 41.87625540000001,
-              longitude: -87.65306249999998,
-              latitudeDelta:  0.0922,
-              longitudeDelta: 0.0421
-            }}
-            onRegionChange={region => this.onRegionChange(region)}
-          >
-          <MapView.Polygon
-            coordinates={this.state.polygons}
-            strokeColor="#F00"
-            fillColor="rgba(255,0,0,0.5)"
-            strokeWidth={1}
-          />
-          </MapView>
+        return (
+          <View style={styles.mapContainer}>
+            <MapView
+              showsUserLocation={true}
+              showsMyLocationButton={true}
+              showsTraffic={true}
+              provider={this.props.provider}
+              ref={ref => { this.map = ref; }}
+              style={styles.map}
+              initialRegion={{
+                latitude: 41.87625540000001,
+                longitude: -87.65306249999998,
+                latitudeDelta:  0.0922,
+                longitudeDelta: 0.0421
+              }}
+              onRegionChange={region => this.onRegionChange(region)}
+            >
+            <MapView.Polygon
+              coordinates={this.state.polygons}
+              strokeColor="#F00"
+              fillColor="rgba(255,0,0,0.5)"
+              strokeWidth={1}
+            />
+            </MapView>
 
-          <View pointerEvents="none" style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
-              <Icon
-              pointerEvents="none"
-              name='rowing'/>
-          </View>
-
-            <View style={styles.navContainer}>
-              <NavigationBar
-                leftButton={leftButtonConfig}
-                title={titleConfig}
-                rightButton={rightButtonConfig}
-              />
+            <View pointerEvents="none" style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent'}}>
+                <Icon
+                pointerEvents="none"
+                name='rowing'/>
             </View>
 
-        <View>
-          <DatePickerIOS
-            date={this.state.date}
-            mode="date"
-            style={styles.DatePickerIOS}
-            timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
-            onDateChange={this.onDateChange}
-          />
-        </View>
+              <View style={styles.navContainer}>
+                <NavigationBar
+                  leftButton={leftButtonConfig}
+                  title={titleConfig}
+                  rightButton={rightButtonConfig}
+                />
+              </View>
 
-          <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                onPress={async () => this.onSubmitPressed()}
-                style={[styles.bubble, styles.button]}
-              >
-                <Text style={styles.buttonText}>Submit Location</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={async () => this.onDatePressed()}
-                style={[styles.bubble, styles.button]}
-              >
-                <Text style={styles.buttonText}>Set Date</Text>
-              </TouchableOpacity>
+          <View>
+            <DatePickerIOS
+              date={this.state.date}
+              mode="date"
+              style={styles.DatePickerIOS}
+              timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
+              onDateChange={this.onDateChange}
+            />
           </View>
-        </View>
-      );
-    } else {
+
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  onPress={async () => this.onSubmitPressed()}
+                  style={[styles.bubble, styles.button]}
+                >
+                  <Text style={styles.buttonText}>Submit Location</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={async () => this.onDatePressed()}
+                  style={[styles.bubble, styles.button]}
+                >
+                  <Text style={styles.buttonText}>Set Date</Text>
+                </TouchableOpacity>
+            </View>
+          </View>
+        );
+    }
+    if(this.state.dateWheel === false) {
       return(
         <View style={styles.mapContainer}>
           <MapView
@@ -195,7 +202,6 @@ class DisplayLatLng extends React.Component {
             showsTraffic={true}
             provider={this.props.provider}
             ref={ref => { this.map = ref; }}
-            mapType={MAP_TYPES.HYBRID}
             style={styles.map}
             initialRegion={{
               latitude: 41.87625540000001,
@@ -252,15 +258,15 @@ class DisplayLatLng extends React.Component {
 const leftButtonConfig = {
   title: 'Log In',
   tintColor: "#F08080",
-  handler: () => alert('FUCK YOU ALL'),
   style: {marginVertical: 20},
+  handler: async() => this.onLoginPressed(),
 };
 
 const rightButtonConfig = {
   title: 'Register',
   tintColor: "#F08080",
-  handler: () => alert('hello!'),
   style: {marginVertical: 20},
+  handler: async() => this.onRegisterPressed(),
 };
 
 const titleConfig = {
