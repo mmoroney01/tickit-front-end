@@ -18,9 +18,6 @@ import { Icon } from 'react-native-elements';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 import NavigationBar from 'react-native-navbar';
 
-var DateTimePicker = require('react-native-datetime').default;
-var Button = require('@remobile/react-native-simple-button');
-
 class DisplayLatLng extends React.Component {
   constructor(props) {
     super(props);
@@ -42,10 +39,6 @@ class DisplayLatLng extends React.Component {
     this.onSubmitPressed = this.onSubmitPressed.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
     this.onDatePressed = this.onDatePressed.bind(this);
-  }
-
-  onRegionChange(region) {
-    this.setState({ region });
   }
 
   componentDidMount() {
@@ -70,12 +63,22 @@ class DisplayLatLng extends React.Component {
     this.setState({ date: date });
   }
 
+  onRegionChange(region) {
+    this.setState({ region });
+  }
+
   onTimezoneChange(event) {
     var offset = parseInt(event.nativeEvent.text, 10);
     if (isNaN(offset)) {
       return;
     }
     this.setState({ timeZoneOffsetInHours: offset });
+  }
+
+  onDatePressed() {
+    this.setState({
+      dateWheel: true
+    })
   }
 
   onSubmitPressed() {
@@ -102,16 +105,10 @@ class DisplayLatLng extends React.Component {
       .done();
   }
 
-  onDatePressed() {
-    this.setState({
-      dateWheel: true
-    })
-  }
-
   render() {
       if(this.state.dateWheel === true){
       return (
-        <View style={styles.container}>
+        <View style={styles.mapContainer}>
           <MapView
             showsUserLocation={true}
             showsMyLocationButton={true}
@@ -142,11 +139,19 @@ class DisplayLatLng extends React.Component {
               name='rowing'/>
           </View>
 
+            <View style={styles.navContainer}>
+              <NavigationBar
+                leftButton={leftButtonConfig}
+                title={titleConfig}
+                rightButton={rightButtonConfig}
+              />
+            </View>
+
         <View>
           <DatePickerIOS
             date={this.state.date}
             mode="date"
-            style={buttonStyles.DatePickerIOS}
+            style={styles.DatePickerIOS}
             timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
             onDateChange={this.onDateChange}
           />
@@ -171,8 +176,7 @@ class DisplayLatLng extends React.Component {
       );
     } else {
       return(
-
-        <View style={styles.container}>
+        <View style={styles.mapContainer}>
           <MapView
             showsUserLocation={true}
             showsMyLocationButton={true}
@@ -204,7 +208,7 @@ class DisplayLatLng extends React.Component {
               name='rowing'/>
           </View>
 
-          <View style={babStyles.container}>
+          <View style={styles.navContainer}>
               <NavigationBar
                 leftButton={leftButtonConfig}
                 title={titleConfig}
@@ -227,32 +231,22 @@ class DisplayLatLng extends React.Component {
                 <Text style={styles.buttonText}>Set Date</Text>
               </TouchableOpacity>
           </View>
-
-
         </View>
       );
     }
   }
 }
 
-const babStyles = {
-  container: {
-    position: 'absolute',
-    top: 0,
-    width: 375,
-  },
-};
-
 const leftButtonConfig = {
-  title: 'Left',
-  tintColor: "orange",
+  title: 'Log In',
+  tintColor: "#F08080",
   handler: () => alert('FUCK YOU ALL'),
   style: {marginVertical: 20},
 };
 
 const rightButtonConfig = {
-  title: 'Right',
-  tintColor: "orange",
+  title: 'Register',
+  tintColor: "#F08080",
   handler: () => alert('hello!'),
   style: {marginVertical: 20},
 };
@@ -265,8 +259,8 @@ const titleConfig = {
 var Heading = React.createClass({
   render() {
     return (
-      <View style={buttonStyles.headingContainer}>
-        <Text style={buttonStyles.heading}>{this.props.label}</Text>
+      <View style={styles.headingContainer}>
+        <Text style={styles.heading}>{this.props.label}</Text>
       </View>
     );
   }
@@ -275,9 +269,9 @@ var Heading = React.createClass({
 var WithLabel = React.createClass({
   render() {
     return (
-      <View style={buttonStyles.labelContainer}>
-        <View style={buttonStyles.labelView}>
-          <Text style={buttonStyles.label}>{this.props.label}</Text>
+      <View style={styles.labelContainer}>
+        <View style={styles.labelView}>
+          <Text style={styles.label}>{this.props.label}</Text>
         </View>
         {this.props.children}
       </View>
@@ -285,135 +279,12 @@ var WithLabel = React.createClass({
   }
 });
 
-const SIZE = 35;
-const HALO_RADIUS = 6;
-const ARROW_SIZE = 7;
-const ARROW_DISTANCE = 6;
-const HALO_SIZE = SIZE + HALO_RADIUS;
-const HEADING_BOX_SIZE = HALO_SIZE + ARROW_SIZE + ARROW_DISTANCE;
-
-const navStyles = StyleSheet.create({
-container: {
-    width: 250,
-  },
-})
-
-const buttonStyles = StyleSheet.create({
-  DatePickerIOS: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    borderRadius: 20,
-    width: 250,
-  },
-  dateLabel: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    borderRadius: 20,
-  },
-  textinput: {
-    height: 26,
-    width: 50,
-    borderWidth: 0.5,
-    borderColor: '#0f0f0f',
-    padding: 4,
-    fontSize: 13
-  },
-  labelContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 2
-  },
-  labelView: {
-    marginRight: 10,
-    paddingVertical: 2
-  },
-  label: {
-    fontWeight: '500'
-  },
-  headingContainer: {
-    padding: 4,
-    backgroundColor: '#f6f7f8'
-  },
-  heading: {
-    fontWeight: '500',
-    fontSize: 14
-  }
-});
-
-const markerStyles = StyleSheet.create({
-  mapMarker: {
-    zIndex: 1000
-  },
-  // The container is necessary to protect the markerHalo shadow from clipping
-  container: {
-    width: HEADING_BOX_SIZE,
-    height: HEADING_BOX_SIZE
-  },
-  heading: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: HEADING_BOX_SIZE,
-    height: HEADING_BOX_SIZE,
-    alignItems: 'center'
-  },
-  headingPointer: {
-    width: 0,
-    height: 0,
-    backgroundColor: 'transparent',
-    borderStyle: 'solid',
-    borderTopWidth: 0,
-    borderRightWidth: ARROW_SIZE * 0.75,
-    borderBottomWidth: ARROW_SIZE,
-    borderLeftWidth: ARROW_SIZE * 0.75,
-    borderTopColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderBottomColor: 'red',
-    borderLeftColor: 'transparent'
-  },
-  markerHalo: {
-    position: 'absolute',
-    backgroundColor: 'white',
-    top: 0,
-    left: 0,
-    width: HALO_SIZE,
-    height: HALO_SIZE,
-    borderRadius: Math.ceil(HALO_SIZE / 2),
-    margin: (HEADING_BOX_SIZE - HALO_SIZE) / 2,
-    shadowColor: 'black',
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 0,
-      width: 0
-    }
-  },
-  marker: {
-    justifyContent: 'center',
-    backgroundColor: 'red',
-    width: SIZE,
-    height: SIZE,
-    borderRadius: Math.ceil(SIZE / 2),
-    margin: (HEADING_BOX_SIZE - SIZE) / 2
-  }
-});
-
 const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject
-  },
   bubble: {
     backgroundColor: 'rgba(255,255,255,0.7)',
     paddingHorizontal: 18,
     paddingVertical: 12,
     borderRadius: 20
-  },
-  latlng: {
-    width: 200,
-    alignItems: 'stretch'
   },
   button: {
     width: 100,
@@ -429,11 +300,36 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center'
-  }
-});
-
-const mapStyles = StyleSheet.create({
-  container: {
+  },
+  DatePickerIOS: {
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    borderRadius: 20,
+    width: 250,
+  },
+  heading: {
+    fontWeight: '500',
+    fontSize: 14
+  },
+  headingContainer: {
+    padding: 4,
+    backgroundColor: '#f6f7f8'
+  },
+  label: {
+    fontWeight: '500'
+  },
+  labelContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 2
+  },
+  labelView: {
+    marginRight: 10,
+    paddingVertical: 2
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject
+  },
+  mapContainer: {
     position: 'absolute',
     top: 0,
     left: 0,
@@ -442,13 +338,11 @@ const mapStyles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
-  map: {
+  navContainer: {
     position: 'absolute',
     top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
-  }
-});
+    width: 375,
+  },
+})
 
 module.exports = DisplayLatLng;
