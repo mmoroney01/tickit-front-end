@@ -7,9 +7,6 @@ import { Icon } from 'react-native-elements';
 import Fontawesomeicons from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const { width, height } = Dimensions.get('window');
-const ASPECT_RATIO = width / height;
-
 var DateTimePicker = require('react-native-datetime').default;
 var Button = require('@remobile/react-native-simple-button');
 
@@ -68,7 +65,6 @@ class DisplayLatLng extends React.Component {
   }
 
   onSubmitPressed() {
-    console.log(this.state.region.latitude)
     fetch('https://tickit-back-end.herokuapp.com/parking_helper', {
       method: 'POST',
       headers: {
@@ -128,28 +124,8 @@ class DisplayLatLng extends React.Component {
             name='rowing'/>
         </View>
 
-        <View>
-        <DatePickerIOS
-          date={this.state.date}
-          mode="datetime"
-          timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
-          onDateChange={this.onDateChange}
-        />
-        <WithLabel>
-          <Text>{
-            this.state.date.toLocaleDateString() +
-            ' ' +
-            this.state.date.toLocaleTimeString()
-          }</Text>
-        </WithLabel>
-      </View>
-
         <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={this.onFindPressed}
-              style={[styles.bubble, styles.button]}>
-              <Text style={styles.buttonText}>Find Your Location</Text>
-            </TouchableOpacity>
+
 
             <TouchableOpacity
               onPress={async () => this.onSubmitPressed()}
