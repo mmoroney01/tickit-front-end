@@ -34,11 +34,23 @@ class DisplayLatLng extends React.Component {
       polygons: [],
       date: new Date(),
       timeZoneOffsetInHours: (-1) * (new Date()).getTimezoneOffset() / 60,
-      dateWheel: false
+      dateWheel: false,
+      login: false,
+      register: false
     };
     this.onSubmitPressed = this.onSubmitPressed.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
     this.onDatePressed = this.onDatePressed.bind(this);
+    this.onLoginPressed = this.onLoginPressed.bind(this);
+    this.onRegisterPressed = this.onRegisterPressed.bind(this);
+  }
+
+  onLoginPressed(){
+    this.setState({login: true});
+  }
+
+  onRegisterPressed(){
+    this.setState({register: true});
   }
 
   componentDidMount() {
