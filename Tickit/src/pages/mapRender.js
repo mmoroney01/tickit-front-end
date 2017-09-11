@@ -119,12 +119,6 @@ class DisplayLatLng extends React.Component {
   }
 
   render() {
-      if(this.state.login === true){
-        return (
-          <Login />
-        );
-      }
-
       if(this.state.dateWheel === true){
         return (
           <View style={styles.mapContainer}>
