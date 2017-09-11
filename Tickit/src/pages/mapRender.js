@@ -68,21 +68,24 @@ class DisplayLatLng extends React.Component {
   }
 
   onSubmitPressed() {
-    fetch("http://tickit-back-end.herokuapp.com/users/:id", {
-        method: 'PUT',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          latitude: this.state.region.latitude,
-          longitude: this.state.region.longitude
-        })
-        .then(response => response.json())
-        .then(responseData => {
-          console.log(responseData);
-        })
+    console.log(this.state.region.latitude)
+    fetch('https://tickit-back-end.herokuapp.com/parking_helper', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        latitude: this.state.region.latitude,
+        longitude: this.state.region.longitude
       })
+    })
+      .then(response => response.json())
+      .then(responseData => {
+        console.log(responseData.response);
+        Alert.alert(responseData.response);
+      })
+      .done();
   }
 
   onFindPressed() {
