@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, ScrollView, AlertIOS } from 'react-n
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
+import DisplayLatLng from './mapRender';
 
 export default class Login extends Component {
   constructor(props) {
@@ -10,13 +11,12 @@ export default class Login extends Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      cancelled: false
     };
   }
 
   signInPress() {
-    console.log(this.state.username);
-    console.log(this.state.password);
     fetch('https://tickit-back-end.herokuapp.com/users/login', {
       method: 'POST',
       headers: {
@@ -36,46 +36,53 @@ export default class Login extends Component {
   }
 
   cancelLoginPress() {
-    console.log('cancelled mfer');
+    this.setState({
+      cancelled: true
+    });
   }
 
   render() {
-    return (
-      <ScrollView style={styles.scroll}>
-        <Container>
-          <Label text="Email" />
-          <TextInput
-            style={styles.textInput}
-            autoCapitalize="none"
-            onChangeText={text => this.setState({ email: text })}
-          />
-        </Container>
-        <Container>
-          <Label text="Password" />
-          <TextInput
-            secureTextEntry={true}
-            style={styles.textInput}
-            onChangeText={text => this.setState({ password: text })}
-          />
-        </Container>
-        <View style={styles.footer}>
+    if (this.state.cancelled === false){
+      return (
+        <ScrollView style={styles.scroll}>
           <Container>
-            <Button
-              label="Sign In"
-              styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
-              onPress={this.signInPress.bind(this)}
+            <Label text="Email" />
+            <TextInput
+              style={styles.textInput}
+              autoCapitalize="none"
+              onChangeText={text => this.setState({ email: text })}
             />
           </Container>
           <Container>
-            <Button
-              label="CANCEL"
-              styles={{ label: styles.buttonBlackText }}
-              onPress={this.cancelLoginPress.bind(this)}
+            <Label text="Password" />
+            <TextInput
+              secureTextEntry={true}
+              style={styles.textInput}
+              onChangeText={text => this.setState({ password: text })}
             />
           </Container>
-        </View>
-      </ScrollView>
-    );
+          <View style={styles.footer}>
+            <Container>
+              <Button
+                label="Sign In"
+                styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
+                onPress={this.signInPress.bind(this)}
+              />
+            </Container>
+            <Container>
+              <Button
+                label="CANCEL"
+                styles={{ label: styles.buttonBlackText }}
+                onPress={this.cancelLoginPress.bind(this)}
+              />
+            </Container>
+          </View>
+        </ScrollView>
+      );
+   }
+    if(this.state.cancelled === true){
+      return <DisplayLatLng />;
+    }
   }
 }
 

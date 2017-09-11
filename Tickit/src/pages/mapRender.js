@@ -47,11 +47,15 @@ class DisplayLatLng extends React.Component {
   }
 
   onLoginPressed(){
-    this.setState({login: true});
+    this.setState({
+      login: true
+    });
   }
 
   onRegisterPressed(){
-    this.setState({register: true});
+    this.setState({
+      register: true
+    });
   }
 
   componentDidMount() {
@@ -119,6 +123,12 @@ class DisplayLatLng extends React.Component {
   }
 
   render() {
+      if(this.state.login === true){
+        return (
+          <Login />
+        );
+      }
+
       if(this.state.dateWheel === true){
         return (
           <View style={styles.mapContainer}>
@@ -151,13 +161,20 @@ class DisplayLatLng extends React.Component {
                 name='rowing'/>
             </View>
 
-              <View style={styles.navContainer}>
-                <NavigationBar
-                  leftButton={leftButtonConfig}
-                  title={titleConfig}
-                  rightButton={rightButtonConfig}
-                />
-              </View>
+          <View style={styles.navContainer}>
+            <NavigationBar leftButton={{
+                title: 'Log In',
+                tintColor: "#F08080",
+                style: {marginVertical: 20},
+                handler: () => this.onLoginPressed(),
+              }} title={titleConfig}
+              rightButton={{
+                  title: 'Register',
+                  tintColor: "#F08080",
+                  style: {marginVertical: 20},
+                  handler: () => this.onRegisterPressed(),
+              }} />
+          </View>
 
           <View>
             <DatePickerIOS
@@ -229,7 +246,18 @@ class DisplayLatLng extends React.Component {
           </View>
 
           <View style={styles.navContainer}>
-            <NavigationBar leftButton={leftButtonConfig} title={titleConfig} rightButton={rightButtonConfig} />
+            <NavigationBar leftButton={{
+                title: 'Log In',
+                tintColor: "#F08080",
+                style: {marginVertical: 20},
+                handler: () => this.onLoginPressed(),
+              }} title={titleConfig}
+              rightButton={{
+                  title: 'Register',
+                  tintColor: "#F08080",
+                  style: {marginVertical: 20},
+                  handler: () => this.onRegisterPressed(),
+              }} />
           </View>
 
           <View style={styles.buttonContainer}>
@@ -246,20 +274,6 @@ class DisplayLatLng extends React.Component {
     }
   }
 }
-
-const leftButtonConfig = {
-  title: 'Log In',
-  tintColor: "#F08080",
-  style: {marginVertical: 20},
-  handler: async() => this.onLoginPressed(),
-};
-
-const rightButtonConfig = {
-  title: 'Register',
-  tintColor: "#F08080",
-  style: {marginVertical: 20},
-  handler: async() => this.onRegisterPressed(),
-};
 
 const titleConfig = {
   marginVertical: 20,
