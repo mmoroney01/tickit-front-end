@@ -194,13 +194,15 @@ const ARROW_DISTANCE = 6;
 const HALO_SIZE = SIZE + HALO_RADIUS;
 const HEADING_BOX_SIZE = HALO_SIZE + ARROW_SIZE + ARROW_DISTANCE;
 
-
 const buttonStyles = StyleSheet.create({
   DatePickerIOS: {
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    borderRadius: 20,
     width: 250,
   },
   dateLabel: {
-    alignItems: 'center'
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    borderRadius: 20,
   },
   textinput: {
     height: 26,
