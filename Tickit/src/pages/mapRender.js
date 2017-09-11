@@ -102,7 +102,6 @@ class DisplayLatLng extends React.Component {
         <MapView
           showsUserLocation={true}
           showsMyLocationButton={true}
-
           showsTraffic={true}
           provider={this.props.provider}
           ref={ref => { this.map = ref; }}
@@ -123,6 +122,27 @@ class DisplayLatLng extends React.Component {
             pointerEvents="none"
             name='rowing'/>
         </View>
+
+        <View>
+        <DatePickerIOS
+          date={this.state.date}
+          mode="date"
+          style={buttonStyles.DatePickerIOS}
+          timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
+          onDateChange={this.onDateChange}
+        />
+      </View>
+
+      <View>
+        <WithLabel>
+          <Text
+          style={buttonStyles.dateLabel}>{
+            this.state.date.toLocaleDateString() +
+            ' ' +
+            this.state.date.toLocaleTimeString()
+          }</Text>
+        </WithLabel>
+      </View>
 
         <View style={styles.buttonContainer}>
 
@@ -176,6 +196,12 @@ const HEADING_BOX_SIZE = HALO_SIZE + ARROW_SIZE + ARROW_DISTANCE;
 
 
 const buttonStyles = StyleSheet.create({
+  DatePickerIOS: {
+    width: 250,
+  },
+  dateLabel: {
+    alignItems: 'center'
+  },
   textinput: {
     height: 26,
     width: 50,
