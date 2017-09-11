@@ -15,8 +15,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { Icon } from 'react-native-elements';
-import Fontawesomeicons from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
+import NavigationBar from 'react-native-navbar';
 
 var DateTimePicker = require('react-native-datetime').default;
 var Button = require('@remobile/react-native-simple-button');
@@ -171,6 +171,7 @@ class DisplayLatLng extends React.Component {
       );
     } else {
       return(
+
         <View style={styles.container}>
           <MapView
             showsUserLocation={true}
@@ -188,6 +189,7 @@ class DisplayLatLng extends React.Component {
             }}
             onRegionChange={region => this.onRegionChange(region)}
           >
+
           <MapView.Polygon
             coordinates={this.state.polygons}
             strokeColor="#F00"
@@ -201,6 +203,14 @@ class DisplayLatLng extends React.Component {
               pointerEvents="none"
               name='rowing'/>
           </View>
+
+          <View style={babStyles.container}>
+              <NavigationBar
+                leftButton={leftButtonConfig}
+                title={titleConfig}
+                rightButton={rightButtonConfig}
+              />
+            </View>
 
           <View style={styles.buttonContainer}>
               <TouchableOpacity
@@ -217,11 +227,40 @@ class DisplayLatLng extends React.Component {
                 <Text style={styles.buttonText}>Set Date</Text>
               </TouchableOpacity>
           </View>
+
+
         </View>
       );
     }
   }
 }
+
+const babStyles = {
+  container: {
+    position: 'absolute',
+    top: 0,
+    width: 375,
+  },
+};
+
+const leftButtonConfig = {
+  title: 'Left',
+  tintColor: "orange",
+  handler: () => alert('FUCK YOU ALL'),
+  style: {marginVertical: 20},
+};
+
+const rightButtonConfig = {
+  title: 'Right',
+  tintColor: "orange",
+  handler: () => alert('hello!'),
+  style: {marginVertical: 20},
+};
+
+const titleConfig = {
+  marginVertical: 20,
+  title: 'Tickit',
+};
 
 var Heading = React.createClass({
   render() {
@@ -252,6 +291,12 @@ const ARROW_SIZE = 7;
 const ARROW_DISTANCE = 6;
 const HALO_SIZE = SIZE + HALO_RADIUS;
 const HEADING_BOX_SIZE = HALO_SIZE + ARROW_SIZE + ARROW_DISTANCE;
+
+const navStyles = StyleSheet.create({
+container: {
+    width: 250,
+  },
+})
 
 const buttonStyles = StyleSheet.create({
   DatePickerIOS: {
