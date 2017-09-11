@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, AlertIOS } from 'react-native';
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
+import DisplayLatLng from './mapRender';
 
 export default class Registration extends Component {
   constructor(props) {
@@ -12,14 +13,12 @@ export default class Registration extends Component {
       username: '',
       email: '',
       password: '',
-      plate_number: ''
+      plate_number: '',
+      registerCancelled: false
     };
   }
 
   registerPress() {
-    console.log(this.state.username);
-    console.log(this.state.password);
-    console.log(this.state.email);
     fetch('https://tickit-back-end.herokuapp.com/users', {
       method: 'POST',
       headers: {
@@ -41,62 +40,70 @@ export default class Registration extends Component {
   }
 
   cancelRegisterPress() {
-    console.log('cancelled mfer');
+    this.setState({
+      registerCancelled: true
+    });
   }
 
   render() {
-    return (
-      <ScrollView style={styles.scroll}>
-        <Container>
-          <Label text="User Name" />
-          <TextInput
-            style={styles.textInput}
-            autoCapitalize="none"
-            onChangeText={text => this.setState({ username: text })}
-          />
-        </Container>
-        <Container>
-          <Label text="Email" />
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={text => this.setState({ email: text })}
-          />
-        </Container>
-        <Container>
-          <Label text="Password" />
-          <TextInput
-            secureTextEntry={true}
-            style={styles.textInput}
-            onChangeText={text => this.setState({ password: text })}
-          />
-        </Container>
-        <Container>
-          <Label text="Plate Number" />
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={text => this.setState({ plate_number: text })}
-          />
-        </Container>
-        <View style={styles.footer}>
+    if (this.state.registerCancelled === false){
+      return(
+        <ScrollView style={styles.scroll}>
           <Container>
-            <Button
-              label="Register"
-              styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
-              onPress={this.registerPress.bind(this)}
+            <Label text="User Name" />
+            <TextInput
+              style={styles.textInput}
+              autoCapitalize="none"
+              onChangeText={text => this.setState({ username: text })}
             />
           </Container>
           <Container>
-            <Button
-              label="CANCEL"
-              styles={{ label: styles.buttonBlackText }}
-              onPress={this.cancelRegisterPress.bind(this)}
+            <Label text="Email" />
+            <TextInput
+              autoCapitalize="none"
+              style={styles.textInput}
+              onChangeText={text => this.setState({ email: text })}
             />
           </Container>
-        </View>
-      </ScrollView>
-    );
+          <Container>
+            <Label text="Password" />
+            <TextInput
+              secureTextEntry={true}
+              style={styles.textInput}
+              onChangeText={text => this.setState({ password: text })}
+            />
+          </Container>
+          <Container>
+            <Label text="Plate Number" />
+            <TextInput
+              autoCapitalize="none"
+              style={styles.textInput}
+              onChangeText={text => this.setState({ plate_number: text })}
+            />
+          </Container>
+          <View style={styles.footer}>
+            <Container>
+              <Button
+                label="Register"
+                styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
+                onPress={this.registerPress.bind(this)}
+              />
+            </Container>
+            <Container>
+              <Button
+                label="CANCEL"
+                styles={{ label: styles.buttonBlackText }}
+                onPress={this.cancelRegisterPress.bind(this)}
+              />
+            </Container>
+          </View>
+        </ScrollView>
+      );
+    }
+
+    if(this.state.registerCancelled === true){
+      return <DisplayLatLng />;
+    }
   }
 }
 
