@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, ScrollView, AlertIOS } from 'react-n
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
+import Heading from '../components/Heading';
 import DisplayLatLng from './mapRender';
 
 export default class Login extends Component {
@@ -42,9 +43,11 @@ export default class Login extends Component {
   }
 
   render() {
-    if (this.state.loginCancelled === false){
-      return(
+    if (this.state.loginCancelled === false) {
+      return (
         <ScrollView style={styles.scroll}>
+          <Heading text="Login" />
+
           <Container>
             <Label text="Email" />
             <TextInput
@@ -79,9 +82,9 @@ export default class Login extends Component {
           </View>
         </ScrollView>
       );
-   }
+    }
 
-    if(this.state.loginCancelled === true){
+    if (this.state.loginCancelled === true) {
       return <DisplayLatLng />;
     }
   }
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
     color: '#595856'
   },
   primaryButton: {
-    backgroundColor: '#34A853'
+    backgroundColor: '#ff7700'
   },
   footer: {
     marginTop: 100
