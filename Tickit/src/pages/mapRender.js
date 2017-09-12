@@ -41,7 +41,8 @@ export default class DisplayLatLng extends React.Component {
       timeZoneOffsetInHours: -1 * new Date().getTimezoneOffset() / 60,
       dateWheel: false,
       login: false,
-      register: false
+      register: false,
+      animating: true
     };
     this.onSubmitPressed = this.onSubmitPressed.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
@@ -108,7 +109,7 @@ export default class DisplayLatLng extends React.Component {
     });
 
     this.setState({
-      animating: true
+      animating: false
     });
 
     fetch('https://tickit-back-end.herokuapp.com/parking_helper', {
@@ -126,7 +127,7 @@ export default class DisplayLatLng extends React.Component {
       .then(response => response.json())
       .then(responseData => {
         this.setState({
-          animating: false
+          animating: true
         });
         this.setState({ polygons: responseData.coordinates });
         Alert.alert(responseData.response);
@@ -164,8 +165,8 @@ export default class DisplayLatLng extends React.Component {
           >
             <MapView.Polygon
               coordinates={this.state.polygons}
-              strokeColor="#F00"
-              fillColor="rgba(255,0,0,0.5)"
+              strokeColor="#c942ff"
+              fillColor="#c942ff"
               strokeWidth={1}
             />
           </MapView>
@@ -223,6 +224,7 @@ export default class DisplayLatLng extends React.Component {
       );
     }
     if (this.state.dateWheel === false) {
+      const isLoading = this.state.animating;
       return (
         <View style={styles.mapContainer}>
           <MapView
@@ -249,22 +251,25 @@ export default class DisplayLatLng extends React.Component {
             />
           </MapView>
 
-          <View
-            pointerEvents="none"
-            style={{
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'transparent'
-            }}
-          >
-            <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
-          </View>
-
+          {isLoading ? (
+            <View
+              pointerEvents="none"
+              style={{
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'transparent'
+              }}
+            >
+              <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
+            </View>
+          ) : (
+            <Spinner />
+          )}
           <View style={styles.navContainer}>
             <NavigationBar
               leftButton={{
@@ -282,13 +287,11 @@ export default class DisplayLatLng extends React.Component {
               }}
             />
           </View>
-
           <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={async () => this.onDatePressed()} style={[styles.bubble, styles.button]}>
               <Text style={styles.buttonText}>Submit Location</Text>
             </TouchableOpacity>
           </View>
-          <Spinner />
         </View>
       );
     }

@@ -8,7 +8,7 @@ class Spinner extends Component {
       const animating = this.state.animating;
       return (
          <View style={styles.container}>
-            <ActivityIndicator animating={animating} color="#bc2b78" size="large" style={styles.activityIndicator} />
+            <ActivityIndicator animating={animating} color="#ff7700" size="large" style={styles.activityIndicator} />
          </View>
       );
    }
