@@ -19,6 +19,7 @@ import { Icon } from 'react-native-elements';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 import NavigationBar from 'react-native-navbar';
 
+import Spinner from '../components/activity_indicator';
 import Login from './Login';
 import Registration from './Registration';
 
@@ -106,6 +107,10 @@ export default class DisplayLatLng extends React.Component {
       dateWheel: false
     });
 
+    this.setState({
+      animating: true
+    });
+
     fetch('https://tickit-back-end.herokuapp.com/parking_helper', {
       method: 'POST',
       headers: {
@@ -120,6 +125,9 @@ export default class DisplayLatLng extends React.Component {
     })
       .then(response => response.json())
       .then(responseData => {
+        this.setState({
+          animating: false
+        });
         this.setState({ polygons: responseData.coordinates });
         Alert.alert(responseData.response);
       })
@@ -280,6 +288,7 @@ export default class DisplayLatLng extends React.Component {
               <Text style={styles.buttonText}>Submit Location</Text>
             </TouchableOpacity>
           </View>
+          <Spinner />
         </View>
       );
     }
