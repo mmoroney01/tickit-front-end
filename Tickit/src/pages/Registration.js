@@ -16,6 +16,7 @@ export default class Registration extends Component {
       password: '',
       plate_number: '',
       plate_type: '',
+      plate_state: '',
       registerCancelled: false
     };
   }
@@ -32,7 +33,8 @@ export default class Registration extends Component {
         email: this.state.email,
         password: this.state.password,
         plate_number: this.state.plate_number,
-        plate_type: this.state.plate_type
+        plate_type: this.state.plate_type,
+        plate_state: this.state.plate_state
       })
     })
       .then(response => response.json())
@@ -91,6 +93,14 @@ export default class Registration extends Component {
               autoCapitalize="none"
               style={styles.textInput}
               onChangeText={text => this.setState({ plate_type: text })}
+            />
+          </Container>
+          <Container>
+            <Label text="Plate State" />
+            <TextInput
+              autoCapitalize="none"
+              style={styles.textInput}
+              onChangeText={text => this.setState({ plate_state: text })}
             />
           </Container>
           <View style={styles.footer}>
