@@ -259,14 +259,14 @@ export default class DisplayLatLng extends React.Component {
             <NavigationBar
               leftButton={{
                 title: 'Log In',
-                tintColor: '#F08080',
+                tintColor: '#ff7700',
                 style: { marginVertical: 20 },
                 handler: () => this.onLoginPressed()
               }}
               title={titleConfig}
               rightButton={{
                 title: 'Register',
-                tintColor: '#F08080',
+                tintColor: '#ff7700',
                 style: { marginVertical: 20 },
                 handler: () => this.onRegisterPressed()
               }}
