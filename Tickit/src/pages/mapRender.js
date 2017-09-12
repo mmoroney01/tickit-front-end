@@ -12,7 +12,7 @@ import {
   View,
   Dimensions,
   DatePickerIOS,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
@@ -104,9 +104,11 @@ export default class DisplayLatLng extends React.Component {
 
   onSubmitPressed() {
     PushNotification.localNotification({
-      title: "My Notification Title",
+    title: "FUCK YOU ALL",
+    message: "FUCK YOU ALL",
+    soundName: 'default',
+    actions: '["Yes", "No"]',
     });
-
     this.setState({
       dateWheel: false
     });
@@ -300,9 +302,6 @@ PushNotification.configure({
     onNotification: function(notification) {
         console.log( 'NOTIFICATION:', notification );
     },
-
-    // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
-    senderID: "YOUR GCM SENDER ID",
 
     permissions: {
         alert: true,
