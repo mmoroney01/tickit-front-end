@@ -22,6 +22,7 @@ import Login from './Login';
 import Registration from './Registration';
 import DisplayLatLng from './mapRender';
 import Button from '../components/Button';
+import Spinner from '../components/activity_indicator';
 
 export default class DisplayLatLngLogIn extends React.Component {
   constructor(props) {
@@ -41,6 +42,7 @@ export default class DisplayLatLngLogIn extends React.Component {
       timeZoneOffsetInHours: -1 * new Date().getTimezoneOffset() / 60,
       dateWheel: false,
       login: false,
+      animating: false,
       register: false,
       loggedIn: true
     };
@@ -114,6 +116,11 @@ export default class DisplayLatLngLogIn extends React.Component {
     this.setState({
       dateWheel: false
     });
+
+    this.setState({
+      animating: false
+    });
+
     fetch('https://tickit-back-end.herokuapp.com/parking_helper', {
       method: 'POST',
       headers: {
@@ -128,6 +135,9 @@ export default class DisplayLatLngLogIn extends React.Component {
     })
       .then(response => response.json())
       .then(responseData => {
+        this.setState({
+          animating: true
+        });
         this.setState({ polygons: responseData.coordinates });
         Alert.alert(responseData.response);
       })

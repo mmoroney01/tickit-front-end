@@ -42,6 +42,7 @@ export default class DisplayLatLng extends React.Component {
       date: new Date(),
       timeZoneOffsetInHours: -1 * new Date().getTimezoneOffset() / 60,
       dateWheel: false,
+      animating: false,
       login: false,
       register: false
     };
