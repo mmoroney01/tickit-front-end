@@ -204,14 +204,10 @@ export default class DisplayLatLng extends React.Component {
             />
           </View>
 
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                  onPress={async () => this.onSubmitPressed()}
-                  style={[styles.bubble, styles.button]}
-                >
-                  <Text style={styles.buttonText}>Confirm Submission</Text>
-                </TouchableOpacity>
-            </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={async () => this.onSubmitPressed()} style={[styles.bubble, styles.button]}>
+              <Text style={styles.buttonText}>Confirm Submission</Text>
+            </TouchableOpacity>
           </View>
         </View>
       );
