@@ -4,6 +4,7 @@ import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
 import DisplayLatLng from './mapRender';
+import Heading from '../components/Heading';
 
 export default class Registration extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class Registration extends Component {
       email: '',
       password: '',
       plate_number: '',
+      plate_type: '',
       registerCancelled: false
     };
   }
@@ -29,7 +31,8 @@ export default class Registration extends Component {
         username: this.state.username,
         email: this.state.email,
         password: this.state.password,
-        plate_number: this.state.plate_number
+        plate_number: this.state.plate_number,
+        plate_type: this.state.plate_type
       })
     })
       .then(response => response.json())
@@ -46,9 +49,10 @@ export default class Registration extends Component {
   }
 
   render() {
-    if (this.state.registerCancelled === false){
-      return(
+    if (this.state.registerCancelled === false) {
+      return (
         <ScrollView style={styles.scroll}>
+          <Heading text="Registration" />
           <Container>
             <Label text="User Name" />
             <TextInput
@@ -81,6 +85,14 @@ export default class Registration extends Component {
               onChangeText={text => this.setState({ plate_number: text })}
             />
           </Container>
+          <Container>
+            <Label text="Plate Type" />
+            <TextInput
+              autoCapitalize="none"
+              style={styles.textInput}
+              onChangeText={text => this.setState({ plate_type: text })}
+            />
+          </Container>
           <View style={styles.footer}>
             <Container>
               <Button
@@ -101,7 +113,7 @@ export default class Registration extends Component {
       );
     }
 
-    if(this.state.registerCancelled === true){
+    if (this.state.registerCancelled === true) {
       return <DisplayLatLng />;
     }
   }
@@ -117,13 +129,13 @@ const styles = StyleSheet.create({
     color: '#595856'
   },
   primaryButton: {
-    backgroundColor: '#34A853'
+    backgroundColor: '#ff7700'
   },
   footer: {
-    marginTop: 100
+    marginTop: 50
   },
   textInput: {
-    height: 60,
+    height: 40,
     fontSize: 20,
     backgroundColor: '#FFF'
   },

@@ -47,7 +47,6 @@ export default class Login extends Component {
       return (
         <ScrollView style={styles.scroll}>
           <Heading text="Login" />
-
           <Container>
             <Label text="Email" />
             <TextInput
