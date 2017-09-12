@@ -21,7 +21,7 @@ export default class Login extends Component {
   signInPress() {
     this.setState({
       loggedIn: true
-    })
+    });
     fetch('https://tickit-back-end.herokuapp.com/users/login', {
       method: 'POST',
       headers: {
@@ -87,11 +87,11 @@ export default class Login extends Component {
       );
     }
 
-   if(this.state.loggedIn === true){
-    return <DisplayLatLngLogIn />;
-   }
+    if (this.state.loggedIn === true) {
+      return <DisplayLatLngLogIn />;
+    }
 
-    if(this.state.loginCancelled === true){
+    if (this.state.loginCancelled === true) {
       return <DisplayLatLng />;
     }
   }
@@ -107,7 +107,8 @@ const styles = StyleSheet.create({
     color: '#595856'
   },
   primaryButton: {
-    backgroundColor: '#ff7700'
+    backgroundColor: '#ff7700',
+    borderRadius: 8
   },
   footer: {
     marginTop: 50
