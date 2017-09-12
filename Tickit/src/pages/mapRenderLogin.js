@@ -181,23 +181,25 @@ export default class DisplayLatLngLogIn extends React.Component {
             strokeWidth={1}
           />
         </MapView>
-
-        <View
-          pointerEvents="none"
-          style={{
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'transparent'
-          }}
-        >
-          <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
-        </View>
-
+        {isLoading ? (
+          <View
+            pointerEvents="none"
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'transparent'
+            }}
+          >
+            <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
+          </View>
+        ) : (
+          <Spinner />
+        )}
         <View style={styles.navContainer}>
           <NavigationBar
             leftButton={{
