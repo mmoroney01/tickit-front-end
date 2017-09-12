@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, ScrollView, AlertIOS } from 'react-n
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
+import DisplayLatLngLogIn from './mapRenderLogin';
 import DisplayLatLng from './mapRender';
 
 export default class Login extends Component {
@@ -12,12 +13,14 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      loggedIn: false,
       loginCancelled: false
     };
   }
 
   signInPress() {
+    this.setState({
+      loggedIn: true
+    })
     fetch('https://tickit-back-end.herokuapp.com/users/login', {
       method: 'POST',
       headers: {
@@ -80,6 +83,10 @@ export default class Login extends Component {
           </View>
         </ScrollView>
       );
+   }
+
+   if(this.state.loggedIn === true){
+    return <DisplayLatLngLogIn />;
    }
 
     if(this.state.loginCancelled === true){

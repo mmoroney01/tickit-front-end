@@ -20,8 +20,9 @@ import NavigationBar from 'react-native-navbar';
 
 import Login from './Login';
 import Registration from './Registration';
+import DisplayLatLng from './mapRender';
 
-export default class DisplayLatLng extends React.Component {
+export default class DisplayLatLngLogIn extends React.Component {
   constructor(props) {
     super(props);
 
@@ -40,6 +41,7 @@ export default class DisplayLatLng extends React.Component {
       dateWheel: false,
       login: false,
       register: false,
+      loggedIn: true
     };
     this.onSubmitPressed = this.onSubmitPressed.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
@@ -138,6 +140,10 @@ export default class DisplayLatLng extends React.Component {
     if (this.state.login === true) {
       return <Login />;
     }
+
+    if (this.state.loggedIn === false){
+      return <DisplayLatLng />;
+    }
     return (
           <View style={styles.mapContainer}>
             <MapView
@@ -184,18 +190,12 @@ export default class DisplayLatLng extends React.Component {
             <View style={styles.navContainer}>
               <NavigationBar
                 leftButton={{
-                  title: 'Log In',
+                  title: 'Log Out',
                   tintColor: '#F08080',
                   style: { marginVertical: 20 },
-                  handler: () => this.onLoginPressed()
+                  handler: () => this.onLogOutPressed()
                 }}
                 title={titleConfig}
-                rightButton={{
-                  title: 'Register',
-                  tintColor: '#F08080',
-                  style: { marginVertical: 20 },
-                  handler: () => this.onRegisterPressed()
-                }}
               />
             </View>
 
@@ -328,4 +328,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = DisplayLatLng;
+module.exports = DisplayLatLngLogIn;
