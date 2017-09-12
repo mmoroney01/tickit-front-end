@@ -227,7 +227,7 @@ export default class DisplayLatLng extends React.Component {
           <View style={styles.buttonContainer}>
             <Button
               label="Confirm Location "
-              styles={{ button: styleButton.primaryButton, label: styleButton.buttonWhiteText }}
+              styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
               onPress={async () => this.onSubmitPressed()}
             />
           </View>
@@ -237,7 +237,7 @@ export default class DisplayLatLng extends React.Component {
           <View style={styles.buttonContainer}>
             <Button
               label="Submit Location"
-              styles={{ button: styleButton.primaryButton, label: styleButton.buttonWhiteText }}
+              styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
               onPress={async () => this.onDatePressed()}
             />
           </View>
@@ -275,35 +275,15 @@ var WithLabel = React.createClass({
   }
 });
 
-const styleButton = StyleSheet.create({
+const styles = StyleSheet.create({
   buttonWhiteText: {
     fontSize: 20,
     color: '#FFF'
-  },
-  buttonBlackText: {
-    fontSize: 20,
-    color: '#595856'
   },
   primaryButton: {
     backgroundColor: '#ff7700',
     borderRadius: 8
   },
-  footer: {
-    marginTop: 50
-  },
-  textInput: {
-    height: 40,
-    fontSize: 20,
-    backgroundColor: '#FFF'
-  },
-  scroll: {
-    backgroundColor: '#FFF',
-    padding: 30,
-    flexDirection: 'column'
-  }
-});
-
-const styles = StyleSheet.create({
   bubble: {
     backgroundColor: 'rgba(255,255,255,0.7)',
     paddingHorizontal: 18,
