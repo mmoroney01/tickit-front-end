@@ -12,12 +12,14 @@ import {
   View,
   Dimensions,
   DatePickerIOS,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 import NavigationBar from 'react-native-navbar';
 
+import Spinner from '../components/activity_indicator';
 import Login from './Login';
 import Registration from './Registration';
 
@@ -112,6 +114,10 @@ export default class DisplayLatLng extends React.Component {
       dateWheel: false
     });
 
+    this.setState({
+      animating: false
+    });
+
     fetch('https://tickit-back-end.herokuapp.com/parking_helper', {
       method: 'POST',
       headers: {
@@ -126,6 +132,9 @@ export default class DisplayLatLng extends React.Component {
     })
       .then(response => response.json())
       .then(responseData => {
+        this.setState({
+          animating: true
+        });
         this.setState({ polygons: responseData.coordinates });
         Alert.alert(responseData.response);
       })
@@ -139,6 +148,7 @@ export default class DisplayLatLng extends React.Component {
     if (this.state.login === true) {
       return <Login />;
     }
+
     return (
           <View style={styles.mapContainer}>
             <MapView
