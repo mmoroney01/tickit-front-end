@@ -12,11 +12,13 @@ export default class Registration extends Component {
 
     this.state = {
       username: '',
+      last_name: '',
       email: '',
       password: '',
       plate_number: '',
       plate_type: '',
       plate_state: '',
+      company_name: '',
       registerCancelled: false
     };
   }
@@ -30,11 +32,13 @@ export default class Registration extends Component {
       },
       body: JSON.stringify({
         username: this.state.username,
+        last_name: this.state.last_name,
         email: this.state.email,
         password: this.state.password,
         plate_number: this.state.plate_number,
         plate_type: this.state.plate_type,
-        plate_state: this.state.plate_state
+        plate_state: this.state.plate_state,
+        company_name: this.state.company_name
       })
     })
       .then(response => response.json())
@@ -61,6 +65,14 @@ export default class Registration extends Component {
               style={styles.textInput}
               autoCapitalize="none"
               onChangeText={text => this.setState({ username: text })}
+            />
+          </Container>
+          <Container>
+            <Label text="Last Name" />
+            <TextInput
+              autoCapitalize="none"
+              style={styles.textInput}
+              onChangeText={text => this.setState({ last_name: text })}
             />
           </Container>
           <Container>
@@ -101,6 +113,14 @@ export default class Registration extends Component {
               autoCapitalize="none"
               style={styles.textInput}
               onChangeText={text => this.setState({ plate_state: text })}
+            />
+          </Container>
+          <Container>
+            <Label text="Company *" />
+            <TextInput
+              autoCapitalize="none"
+              style={styles.textInput}
+              onChangeText={text => this.setState({ company_name: text })}
             />
           </Container>
           <View style={styles.footer}>
