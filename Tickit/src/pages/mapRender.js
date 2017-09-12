@@ -21,6 +21,8 @@ import NavigationBar from 'react-native-navbar';
 import Login from './Login';
 import Registration from './Registration';
 
+var PushNotification = require('react-native-push-notification');
+
 export default class DisplayLatLng extends React.Component {
   constructor(props) {
     super(props);
@@ -101,9 +103,14 @@ export default class DisplayLatLng extends React.Component {
   }
 
   onSubmitPressed() {
+    PushNotification.localNotification({
+      title: "My Notification Title",
+    });
+
     this.setState({
       dateWheel: false
     });
+
     fetch('https://tickit-back-end.herokuapp.com/parking_helper', {
       method: 'POST',
       headers: {
@@ -284,6 +291,29 @@ export default class DisplayLatLng extends React.Component {
     }
   }
 }
+
+PushNotification.configure({
+    onRegister: function(token) {
+        console.log( 'TOKEN:', token );
+    },
+
+    onNotification: function(notification) {
+        console.log( 'NOTIFICATION:', notification );
+    },
+
+    // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
+    senderID: "YOUR GCM SENDER ID",
+
+    permissions: {
+        alert: true,
+        badge: true,
+        sound: true
+    },
+
+    popInitialNotification: true,
+
+    requestPermissions: true,
+});
 
 const titleConfig = {
   marginVertical: 20,

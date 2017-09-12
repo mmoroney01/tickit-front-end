@@ -3,6 +3,9 @@ package com.tickit;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.joshblour.reactnativeheading.ReactNativeHeadingPackage;
+import com.keyee.datetime.RCTDateTimePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +28,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativePushNotificationPackage(),
+            new ReactNativeHeadingPackage(),
+            new RCTDateTimePickerPackage(),
             new VectorIconsPackage(),
             new MapsPackage()
       );
