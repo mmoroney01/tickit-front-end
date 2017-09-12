@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import Label from '../components/Label';
 import DisplayLatLngLogIn from './mapRenderLogin';
 import DisplayLatLng from './mapRender';
+import Heading from '../components/Heading';
 
 export default class Login extends Component {
   constructor(props) {
