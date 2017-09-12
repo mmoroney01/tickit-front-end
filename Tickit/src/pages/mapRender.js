@@ -12,7 +12,7 @@ import {
   View,
   Dimensions,
   DatePickerIOS,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
@@ -20,8 +20,6 @@ import NavigationBar from 'react-native-navbar';
 
 import Login from './Login';
 import Registration from './Registration';
-
-var PushNotification = require('react-native-push-notification');
 
 export default class DisplayLatLng extends React.Component {
   constructor(props) {
@@ -103,12 +101,6 @@ export default class DisplayLatLng extends React.Component {
   }
 
   onSubmitPressed() {
-    PushNotification.localNotification({
-    title: "FUCK YOU ALL",
-    message: "FUCK YOU ALL",
-    soundName: 'default',
-    actions: '["Yes", "No"]',
-    });
     this.setState({
       dateWheel: false
     });
@@ -180,7 +172,8 @@ export default class DisplayLatLng extends React.Component {
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: 'transparent'
-            }}>
+            }}
+          >
             <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
           </View>
 
@@ -258,7 +251,8 @@ export default class DisplayLatLng extends React.Component {
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: 'transparent'
-            }}>
+            }}
+          >
             <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
           </View>
 
@@ -290,26 +284,6 @@ export default class DisplayLatLng extends React.Component {
     }
   }
 }
-
-PushNotification.configure({
-    onRegister: function(token) {
-        console.log( 'TOKEN:', token );
-    },
-
-    onNotification: function(notification) {
-        console.log( 'NOTIFICATION:', notification );
-    },
-
-    permissions: {
-        alert: true,
-        badge: true,
-        sound: true
-    },
-
-    popInitialNotification: true,
-
-    requestPermissions: true,
-});
 
 const titleConfig = {
   marginVertical: 20,
