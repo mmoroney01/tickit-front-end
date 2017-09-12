@@ -12,18 +12,17 @@ import {
   View,
   Dimensions,
   DatePickerIOS,
-  TouchableOpacity,
-  ActivityIndicator
+  TouchableOpacity
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 import NavigationBar from 'react-native-navbar';
 
-import Spinner from '../components/activity_indicator';
 import Login from './Login';
 import Registration from './Registration';
+import DisplayLatLng from './mapRender';
 
-export default class DisplayLatLng extends React.Component {
+export default class DisplayLatLngLogIn extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,6 +41,7 @@ export default class DisplayLatLng extends React.Component {
       dateWheel: false,
       login: false,
       register: false,
+      loggedIn: true
     };
     this.onSubmitPressed = this.onSubmitPressed.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
@@ -113,11 +113,6 @@ export default class DisplayLatLng extends React.Component {
     this.setState({
       dateWheel: false
     });
-
-    this.setState({
-      animating: false
-    });
-
     fetch('https://tickit-back-end.herokuapp.com/parking_helper', {
       method: 'POST',
       headers: {
@@ -132,9 +127,6 @@ export default class DisplayLatLng extends React.Component {
     })
       .then(response => response.json())
       .then(responseData => {
-        this.setState({
-          animating: true
-        });
         this.setState({ polygons: responseData.coordinates });
         Alert.alert(responseData.response);
       })
@@ -149,6 +141,9 @@ export default class DisplayLatLng extends React.Component {
       return <Login />;
     }
 
+    if (this.state.loggedIn === false){
+      return <DisplayLatLng />;
+    }
     return (
           <View style={styles.mapContainer}>
             <MapView
@@ -195,18 +190,12 @@ export default class DisplayLatLng extends React.Component {
             <View style={styles.navContainer}>
               <NavigationBar
                 leftButton={{
-                  title: 'Log In',
+                  title: 'Log Out',
                   tintColor: '#F08080',
                   style: { marginVertical: 20 },
-                  handler: () => this.onLoginPressed()
+                  handler: () => this.onLogOutPressed()
                 }}
                 title={titleConfig}
-                rightButton={{
-                  title: 'Register',
-                  tintColor: '#F08080',
-                  style: { marginVertical: 20 },
-                  handler: () => this.onRegisterPressed()
-                }}
               />
             </View>
 
@@ -221,6 +210,7 @@ export default class DisplayLatLng extends React.Component {
                 />
               </View>
             }
+
             {this.state.dateWheel === true &&
               <View style={styles.buttonContainer}>
                   <TouchableOpacity
@@ -338,4 +328,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = DisplayLatLng;
+module.exports = DisplayLatLngLogIn;
