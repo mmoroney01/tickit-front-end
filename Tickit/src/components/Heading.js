@@ -12,10 +12,11 @@ const Heading = props => {
 
 const styles = StyleSheet.create({
     textLabel: {
-        fontSize: 30,
+        fontSize: 28,
         fontWeight: 'bold',
         fontFamily: 'Verdana',
-        marginBottom: 100,
+        marginBottom: 80,
+        marginTop: 50,
         color: '#595856'
     }
 });

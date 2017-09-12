@@ -103,11 +103,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#ff7700'
   },
   footer: {
-    marginTop: 100
+    marginTop: 50
   },
   textInput: {
-    height: 80,
-    fontSize: 30,
+    height: 40,
+    fontSize: 20,
     backgroundColor: '#FFF'
   },
   scroll: {
