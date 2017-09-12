@@ -212,14 +212,11 @@ export default class DisplayLatLng extends React.Component {
             />
           </View>
 
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                  onPress={async () => this.onSubmitPressed()}
-                  style={[styles.bubble, styles.button]}
-                >
-                  <Text style={styles.buttonText}>Confirm Submission</Text>
-                </TouchableOpacity>
-            </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={async () => this.onSubmitPressed()} style={[styles.bubble, styles.button]}>
+              <Text style={styles.buttonText}>Confirm Submission</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       );
     }
@@ -269,14 +266,14 @@ export default class DisplayLatLng extends React.Component {
             <NavigationBar
               leftButton={{
                 title: 'Log In',
-                tintColor: '#F08080',
+                tintColor: '#ff7700',
                 style: { marginVertical: 20 },
                 handler: () => this.onLoginPressed()
               }}
               title={titleConfig}
               rightButton={{
                 title: 'Register',
-                tintColor: '#F08080',
+                tintColor: '#ff7700',
                 style: { marginVertical: 20 },
                 handler: () => this.onRegisterPressed()
               }}
