@@ -159,7 +159,8 @@ const styles = StyleSheet.create({
     color: '#595856'
   },
   primaryButton: {
-    backgroundColor: '#ff7700'
+    backgroundColor: '#ff7700',
+    borderRadius: 8
   },
   footer: {
     marginTop: 50
