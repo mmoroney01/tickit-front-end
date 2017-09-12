@@ -171,8 +171,7 @@ export default class DisplayLatLng extends React.Component {
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: 'transparent'
-            }}
-          >
+            }}>
             <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
           </View>
 
@@ -212,7 +211,6 @@ export default class DisplayLatLng extends React.Component {
                   <Text style={styles.buttonText}>Confirm Submission</Text>
                 </TouchableOpacity>
             </View>
-          </View>
         </View>
       );
     }
@@ -254,8 +252,7 @@ export default class DisplayLatLng extends React.Component {
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: 'transparent'
-            }}
-          >
+            }}>
             <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
           </View>
 
