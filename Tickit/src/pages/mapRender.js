@@ -105,6 +105,7 @@ export default class DisplayLatLng extends React.Component {
     this.setState({
       dateWheel: false
     });
+
     fetch('https://tickit-back-end.herokuapp.com/parking_helper', {
       method: 'POST',
       headers: {
