@@ -226,7 +226,7 @@ export default class DisplayLatLng extends React.Component {
         {this.state.dateWheel === true && (
           <View style={styles.buttonContainer}>
             <Button
-              label="Confirm Location "
+              label="Confirm Location"
               styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
               onPress={async () => this.onSubmitPressed()}
             />
