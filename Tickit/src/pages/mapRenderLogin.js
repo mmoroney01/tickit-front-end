@@ -43,6 +43,7 @@ export default class DisplayLatLngLogIn extends React.Component {
       dateWheel: false,
       login: false,
       animating: true,
+      auth_token: this.props.auth_token,
       register: false,
       loggedIn: true
     };
@@ -52,6 +53,7 @@ export default class DisplayLatLngLogIn extends React.Component {
     this.onLoginPressed = this.onLoginPressed.bind(this);
     this.onRegisterPressed = this.onRegisterPressed.bind(this);
     this.onLogOutPressed = this.onLogOutPressed.bind(this);
+    this.onTowedPressed = this.onTowedPressed.bind(this);
   }
 
   onLoginPressed() {
@@ -110,6 +112,30 @@ export default class DisplayLatLngLogIn extends React.Component {
     this.setState({
       dateWheel: true
     });
+  }
+
+  onTowedPressed() {
+    this.setState({
+      animating: false
+    });
+    fetch('https://tickit-back-end.herokuapp.com/towing_helper', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        auth_token: this.state.auth_token
+      })
+    })
+      .then(response => response.json())
+      .then(responseData => {
+        this.setState({
+          animating: true
+        });
+        console.log(responseData);
+      })
+      .done();
   }
 
   onSubmitPressed() {
@@ -177,8 +203,8 @@ export default class DisplayLatLngLogIn extends React.Component {
         >
           <MapView.Polygon
             coordinates={this.state.polygons}
-            strokeColor="#F00"
-            fillColor="rgba(255,0,0,0.5)"
+            strokeColor="#9008b2"
+            fillColor="rgba(197,53,255,0.5)"
             strokeWidth={1}
           />
         </MapView>
@@ -210,6 +236,12 @@ export default class DisplayLatLngLogIn extends React.Component {
               handler: () => this.onLogOutPressed()
             }}
             title={titleConfig}
+            rightButton={{
+              title: 'Towed',
+              tintColor: '#F08080',
+              style: { marginVertical: 20 },
+              handler: () => this.onTowedPressed()
+            }}
           />
         </View>
 
