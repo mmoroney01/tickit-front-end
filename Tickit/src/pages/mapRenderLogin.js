@@ -41,23 +41,14 @@ export default class DisplayLatLngLogIn extends React.Component {
       date: new Date(),
       timeZoneOffsetInHours: -1 * new Date().getTimezoneOffset() / 60,
       dateWheel: false,
-      login: false,
       animating: true,
-      register: false,
       loggedIn: true
     };
     this.onSubmitPressed = this.onSubmitPressed.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
     this.onDatePressed = this.onDatePressed.bind(this);
-    this.onLoginPressed = this.onLoginPressed.bind(this);
-    this.onRegisterPressed = this.onRegisterPressed.bind(this);
     this.onLogOutPressed = this.onLogOutPressed.bind(this);
-  }
-
-  onLoginPressed() {
-    this.setState({
-      login: true
-    });
+    this.onCancelPressed = this.onCancelPressed.bind(this);
   }
 
   onLogOutPressed() {
@@ -66,9 +57,9 @@ export default class DisplayLatLngLogIn extends React.Component {
     });
   }
 
-  onRegisterPressed() {
+  onCancelPressed(){
     this.setState({
-      register: true
+      dateWheel: false
     });
   }
 
@@ -145,13 +136,6 @@ export default class DisplayLatLngLogIn extends React.Component {
   }
 
   render() {
-    if (this.state.register === true) {
-      return <Registration />;
-    }
-    if (this.state.login === true) {
-      return <Login />;
-    }
-
     if (this.state.loggedIn === false) {
       return <DisplayLatLng />;
     }
@@ -231,6 +215,11 @@ export default class DisplayLatLngLogIn extends React.Component {
               label="Confirm Location"
               styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
               onPress={async () => this.onSubmitPressed()}
+            />
+            <Button
+              label="Cancel"
+              styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
+              onPress={async () => this.onCancelPressed()}
             />
           </View>
         )}
