@@ -234,20 +234,19 @@ export default class DisplayLatLng extends React.Component {
                 />
               </View>
             }
+
             {this.state.dateWheel === true &&
               <View style={styles.buttonContainer}>
-                  <TouchableOpacity
-                    onPress={async () => this.onSubmitPressed()}
-                    style={[styles.bubble, styles.button]}
-                  >
-                    <Text style={styles.buttonText}>Confirm Submission</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={async () => this.onCancelPressed()}
-                    style={[styles.bubble, styles.button]}
-                  >
-                    <Text style={styles.buttonText}>Cancel</Text>
-                  </TouchableOpacity>
+                <Button
+                  label="Confirm Location"
+                  styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
+                  onPress={async () => this.onSubmitPressed()}
+                />
+                <Button
+                  label="Cancel"
+                  styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
+                  onPress={async () => this.onCancelPressed()}
+                />
               </View>
             }
         {this.state.dateWheel === false && (
