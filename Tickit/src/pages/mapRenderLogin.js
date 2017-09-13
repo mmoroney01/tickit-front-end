@@ -43,6 +43,7 @@ export default class DisplayLatLngLogIn extends React.Component {
       dateWheel: false,
       login: false,
       animating: true,
+      auth_token: '',
       register: false,
       loggedIn: true
     };
