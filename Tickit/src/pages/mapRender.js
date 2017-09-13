@@ -44,6 +44,7 @@ export default class DisplayLatLng extends React.Component {
       dateWheel: false,
       animating: true,
       login: false,
+      auth_token: this.props.auth_token,
       register: false
     };
     this.onSubmitPressed = this.onSubmitPressed.bind(this);
@@ -180,8 +181,8 @@ export default class DisplayLatLng extends React.Component {
         >
           <MapView.Polygon
             coordinates={this.state.polygons}
-            strokeColor="#F00"
-            fillColor="rgba(255,0,0,0.5)"
+            strokeColor="#9008b2"
+            fillColor="rgba(197,53,255,0.5)"
             strokeWidth={1}
           />
         </MapView>
