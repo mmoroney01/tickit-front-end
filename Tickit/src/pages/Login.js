@@ -35,7 +35,9 @@ export default class Login extends Component {
     })
       .then(response => response.json())
       .then(responseData => {
-        console.log(responseData);
+        console.log(responseData.auth_token);
+        this.setState({ auth_token: responseData.auth_token });
+        console.log(this.state.auth_token);
       })
       .done();
   }
@@ -88,7 +90,7 @@ export default class Login extends Component {
     }
 
     if (this.state.loggedIn === true) {
-      return <DisplayLatLngLogIn />;
+      return <DisplayLatLngLogIn auth_token={this.state.auth_token} />;
     }
 
     if (this.state.loginCancelled === true) {

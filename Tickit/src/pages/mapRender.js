@@ -44,7 +44,7 @@ export default class DisplayLatLng extends React.Component {
       dateWheel: false,
       animating: true,
       login: false,
-      auth_token: '',
+      auth_token: this.props.auth_token,
       register: false
     };
     this.onSubmitPressed = this.onSubmitPressed.bind(this);

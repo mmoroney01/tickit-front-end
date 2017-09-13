@@ -43,7 +43,7 @@ export default class DisplayLatLngLogIn extends React.Component {
       dateWheel: false,
       login: false,
       animating: true,
-      auth_token: '',
+      auth_token: this.props.auth_token,
       register: false,
       loggedIn: true
     };
@@ -53,6 +53,7 @@ export default class DisplayLatLngLogIn extends React.Component {
     this.onLoginPressed = this.onLoginPressed.bind(this);
     this.onRegisterPressed = this.onRegisterPressed.bind(this);
     this.onLogOutPressed = this.onLogOutPressed.bind(this);
+    this.onTowedPressed = this.onTowedPressed.bind(this);
   }
 
   onLoginPressed() {
@@ -111,6 +112,31 @@ export default class DisplayLatLngLogIn extends React.Component {
     this.setState({
       dateWheel: true
     });
+  }
+
+  onTowedPressed() {
+    console.log(this.props.auth_token);
+    this.setState({
+      animating: false
+    });
+    fetch('https://tickit-back-end.herokuapp.com/towing_helper', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        auth_token: this.state.auth_token
+      })
+    })
+      .then(response => response.json())
+      .then(responseData => {
+        this.setState({
+          animating: true
+        });
+        console.log(responseData);
+      })
+      .done();
   }
 
   onSubmitPressed() {
@@ -211,6 +237,12 @@ export default class DisplayLatLngLogIn extends React.Component {
               handler: () => this.onLogOutPressed()
             }}
             title={titleConfig}
+            rightButton={{
+              title: 'Towed',
+              tintColor: '#F08080',
+              style: { marginVertical: 20 },
+              handler: () => this.onTowedPressed()
+            }}
           />
         </View>
 
