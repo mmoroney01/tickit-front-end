@@ -115,7 +115,6 @@ export default class DisplayLatLngLogIn extends React.Component {
   }
 
   onTowedPressed() {
-    console.log(this.props.auth_token);
     this.setState({
       animating: false
     });
