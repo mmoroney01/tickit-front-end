@@ -96,9 +96,7 @@ export default class DisplayLatLngLogIn extends React.Component {
   }
 
   onDatePressed() {
-    this.setState({
-      dateWheel: true
-    });
+    this.setState({ dateWheel: true });
   }
 
   onTowedPressed() {
