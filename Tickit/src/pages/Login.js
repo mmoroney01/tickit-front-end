@@ -26,9 +26,6 @@ export default class Login extends Component {
   }
 
   signInPress() {
-    this.setState({
-      loggedIn: true
-    });
     fetch('https://tickit-back-end.herokuapp.com/users/login', {
       method: 'POST',
       headers: {
@@ -46,7 +43,8 @@ export default class Login extends Component {
         this.setState({ auth_token: responseData.auth_token });
         Alert.alert(responseData.response);
         this.setState({
-          loginCancelled: true
+          loginCancelled: true,
+          loggedIn: true
         });
       })
       .catch(error => {
