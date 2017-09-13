@@ -50,7 +50,8 @@ export default class DisplayLatLngLogIn extends React.Component {
 
   onLogOutPressed() {
     this.setState({
-      loggedIn: false
+      loggedIn: false,
+      auth_token: ''
     });
   }
 
