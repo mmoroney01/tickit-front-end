@@ -52,6 +52,7 @@ export default class DisplayLatLng extends React.Component {
     this.onLoginPressed = this.onLoginPressed.bind(this);
     this.onRegisterPressed = this.onRegisterPressed.bind(this);
     this.onLogOutPressed = this.onLogOutPressed.bind(this);
+    this.onCancelPressed = this.onCancelPressed.bind(this);
   }
 
   onLoginPressed() {
@@ -63,6 +64,12 @@ export default class DisplayLatLng extends React.Component {
   onLogOutPressed() {
     this.setState({
       loggedIn: false
+    });
+  }
+
+  onCancelPressed(){
+    this.setState({
+      dateWheel: false
     });
   }
 
@@ -215,27 +222,33 @@ export default class DisplayLatLng extends React.Component {
           />
         </View>
 
-        {this.state.dateWheel === true && (
-          <View>
-            <DatePickerIOS
-              date={this.state.date}
-              mode="date"
-              style={styles.DatePickerIOS}
-              timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
-              onDateChange={this.onDateChange}
-            />
-          </View>
-        )}
-        {this.state.dateWheel === true && (
-          <View style={styles.buttonContainer}>
-            <Button
-              label="Confirm Location"
-              styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
-              onPress={async () => this.onSubmitPressed()}
-            />
-          </View>
-        )}
-
+            {this.state.dateWheel === true &&
+              <View>
+                <DatePickerIOS
+                  date={this.state.date}
+                  mode="date"
+                  style={styles.DatePickerIOS}
+                  timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
+                  onDateChange={this.onDateChange}
+                />
+              </View>
+            }
+            {this.state.dateWheel === true &&
+              <View style={styles.buttonContainer}>
+                  <TouchableOpacity
+                    onPress={async () => this.onSubmitPressed()}
+                    style={[styles.bubble, styles.button]}
+                  >
+                    <Text style={styles.buttonText}>Confirm Submission</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={async () => this.onCancelPressed()}
+                    style={[styles.bubble, styles.button]}
+                  >
+                    <Text style={styles.buttonText}>Cancel</Text>
+                  </TouchableOpacity>
+              </View>
+            }
         {this.state.dateWheel === false && (
           <View style={styles.buttonContainer}>
             <Button
