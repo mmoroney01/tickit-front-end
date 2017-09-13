@@ -42,7 +42,7 @@ export default class DisplayLatLngLogIn extends React.Component {
       timeZoneOffsetInHours: -1 * new Date().getTimezoneOffset() / 60,
       dateWheel: false,
       login: false,
-      animating: false,
+      animating: true,
       register: false,
       loggedIn: true
     };
@@ -155,6 +155,7 @@ export default class DisplayLatLngLogIn extends React.Component {
     if (this.state.loggedIn === false) {
       return <DisplayLatLng />;
     }
+    const isLoading = this.state.animating;
     return (
       <View style={styles.mapContainer}>
         <MapView
