@@ -49,6 +49,7 @@ export default class DisplayLatLng extends React.Component {
     this.onLoginPressed = this.onLoginPressed.bind(this);
     this.onRegisterPressed = this.onRegisterPressed.bind(this);
     this.onLogOutPressed = this.onLogOutPressed.bind(this);
+    this.onCancelPressed = this.onCancelPressed.bind(this);
   }
 
   onLoginPressed() {
@@ -60,6 +61,12 @@ export default class DisplayLatLng extends React.Component {
   onLogOutPressed(){
     this.setState({
       loggedIn: false
+    });
+  }
+
+  onCancelPressed(){
+    this.setState({
+      dateWheel: false
     });
   }
 
@@ -228,6 +235,12 @@ export default class DisplayLatLng extends React.Component {
                     style={[styles.bubble, styles.button]}
                   >
                     <Text style={styles.buttonText}>Confirm Submission</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={async () => this.onCancelPressed()}
+                    style={[styles.bubble, styles.button]}
+                  >
+                    <Text style={styles.buttonText}>Cancel</Text>
                   </TouchableOpacity>
               </View>
             }
