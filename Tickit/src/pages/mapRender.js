@@ -42,6 +42,7 @@ export default class DisplayLatLng extends React.Component {
       date: new Date(),
       timeZoneOffsetInHours: -1 * new Date().getTimezoneOffset() / 60,
       dateWheel: false,
+      animating: true,
       login: false,
       register: false
     };
@@ -150,7 +151,7 @@ export default class DisplayLatLng extends React.Component {
     if (this.state.login === true) {
       return <Login />;
     }
-
+    const isLoading = this.state.animating;
     return (
       <View style={styles.mapContainer}>
         <MapView
@@ -177,23 +178,25 @@ export default class DisplayLatLng extends React.Component {
             strokeWidth={1}
           />
         </MapView>
-
-        <View
-          pointerEvents="none"
-          style={{
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'transparent'
-          }}
-        >
-          <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} iconStyle={{ marginTop: 20 }} />
-        </View>
-
+        {isLoading ? (
+          <View
+            pointerEvents="none"
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'transparent'
+            }}
+          >
+            <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
+          </View>
+        ) : (
+          <Spinner />
+        )}
         <View style={styles.navContainer}>
           <NavigationBar
             leftButton={{

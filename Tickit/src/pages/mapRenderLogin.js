@@ -22,6 +22,7 @@ import Login from './Login';
 import Registration from './Registration';
 import DisplayLatLng from './mapRender';
 import Button from '../components/Button';
+import Spinner from '../components/activity_indicator';
 
 export default class DisplayLatLngLogIn extends React.Component {
   constructor(props) {
@@ -41,6 +42,7 @@ export default class DisplayLatLngLogIn extends React.Component {
       timeZoneOffsetInHours: -1 * new Date().getTimezoneOffset() / 60,
       dateWheel: false,
       login: false,
+      animating: true,
       register: false,
       loggedIn: true
     };
@@ -114,6 +116,11 @@ export default class DisplayLatLngLogIn extends React.Component {
     this.setState({
       dateWheel: false
     });
+
+    this.setState({
+      animating: false
+    });
+
     fetch('https://tickit-back-end.herokuapp.com/parking_helper', {
       method: 'POST',
       headers: {
@@ -128,6 +135,9 @@ export default class DisplayLatLngLogIn extends React.Component {
     })
       .then(response => response.json())
       .then(responseData => {
+        this.setState({
+          animating: true
+        });
         this.setState({ polygons: responseData.coordinates });
         Alert.alert(responseData.response);
       })
@@ -145,6 +155,7 @@ export default class DisplayLatLngLogIn extends React.Component {
     if (this.state.loggedIn === false) {
       return <DisplayLatLng />;
     }
+    const isLoading = this.state.animating;
     return (
       <View style={styles.mapContainer}>
         <MapView
@@ -171,23 +182,25 @@ export default class DisplayLatLngLogIn extends React.Component {
             strokeWidth={1}
           />
         </MapView>
-
-        <View
-          pointerEvents="none"
-          style={{
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'transparent'
-          }}
-        >
-          <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
-        </View>
-
+        {isLoading ? (
+          <View
+            pointerEvents="none"
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'transparent'
+            }}
+          >
+            <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
+          </View>
+        ) : (
+          <Spinner />
+        )}
         <View style={styles.navContainer}>
           <NavigationBar
             leftButton={{
