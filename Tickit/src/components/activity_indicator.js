@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 70
+      marginTop: 105
    },
    activityIndicator: {
       flex: 1,

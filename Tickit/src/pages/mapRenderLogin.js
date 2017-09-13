@@ -202,7 +202,13 @@ export default class DisplayLatLngLogIn extends React.Component {
               backgroundColor: 'transparent'
             }}
           >
-            <Icon pointerEvents="none" name="person-pin-circle" color="#ff7700" size={40} />
+            <Icon
+              pointerEvents="none"
+              name="person-pin-circle"
+              color="#ff7700"
+              size={40}
+              IconStyling={{ paddingTop: 10 }}
+            />
           </View>
         ) : (
           <Spinner />
