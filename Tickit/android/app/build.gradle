@@ -133,6 +133,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-splash-screen')
     compile project(':react-native-push-notification')
     compile project(':react-native-heading')
     compile project(':react-native-datetime')
