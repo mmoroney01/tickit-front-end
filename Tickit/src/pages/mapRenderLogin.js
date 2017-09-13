@@ -118,7 +118,7 @@ export default class DisplayLatLngLogIn extends React.Component {
         this.setState({
           animating: true
         });
-        console.log(responseData);
+        Alert.alert(responseData.response);
       })
       .done();
   }
