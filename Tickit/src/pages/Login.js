@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView, AlertIOS } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, AlertIOS, Alert } from 'react-native';
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
@@ -18,6 +18,13 @@ export default class Login extends Component {
     };
   }
 
+  handleErrors(response) {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response;
+  }
+
   signInPress() {
     this.setState({
       loggedIn: true
@@ -33,10 +40,17 @@ export default class Login extends Component {
         password: this.state.password
       })
     })
+      .then(this.handleErrors)
       .then(response => response.json())
       .then(responseData => {
         this.setState({ auth_token: responseData.auth_token });
         Alert.alert(responseData.response);
+        this.setState({
+          loginCancelled: true
+        });
+      })
+      .catch(error => {
+        console.log(error);
       })
       .done();
   }
