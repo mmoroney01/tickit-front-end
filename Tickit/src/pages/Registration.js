@@ -24,6 +24,9 @@ export default class Registration extends Component {
   }
 
   registerPress() {
+    this.setState({
+      registerCancelled: true
+    });
     fetch('https://tickit-back-end.herokuapp.com/users', {
       method: 'POST',
       headers: {
