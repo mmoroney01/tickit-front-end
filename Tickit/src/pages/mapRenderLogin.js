@@ -18,8 +18,6 @@ import { Icon } from 'react-native-elements';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 import NavigationBar from 'react-native-navbar';
 
-import Login from './Login';
-import Registration from './Registration';
 import DisplayLatLng from './mapRender';
 import Button from '../components/Button';
 import Spinner from '../components/activity_indicator';
@@ -43,20 +41,11 @@ export default class DisplayLatLngLogIn extends React.Component {
       dateWheel: false,
       animating: true,
       auth_token: this.props.auth_token,
-      register: false,
       loggedIn: true
     };
-    this.onSubmitPressed = this.onSubmitPressed.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
-    this.onDatePressed = this.onDatePressed.bind(this);
     this.onLogOutPressed = this.onLogOutPressed.bind(this);
     this.onTowedPressed = this.onTowedPressed.bind(this);
-  }
-
-  onLoginPressed() {
-    this.setState({
-      login: true
-    });
   }
 
   onLogOutPressed() {

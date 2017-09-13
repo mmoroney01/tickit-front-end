@@ -47,13 +47,9 @@ export default class DisplayLatLng extends React.Component {
       auth_token: this.props.auth_token,
       register: false
     };
-    this.onSubmitPressed = this.onSubmitPressed.bind(this);
-    this.onDateChange = this.onDateChange.bind(this);
     this.onDatePressed = this.onDatePressed.bind(this);
     this.onLoginPressed = this.onLoginPressed.bind(this);
     this.onRegisterPressed = this.onRegisterPressed.bind(this);
-    this.onLogOutPressed = this.onLogOutPressed.bind(this);
-    this.onCancelPressed = this.onCancelPressed.bind(this);
   }
 
   onLoginPressed() {
