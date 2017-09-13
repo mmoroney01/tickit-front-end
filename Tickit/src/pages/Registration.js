@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView, AlertIOS } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, AlertIOS, Alert } from 'react-native';
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
@@ -20,6 +20,13 @@ export default class Registration extends Component {
     };
   }
 
+  handleErrors(response) {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response;
+  }
+
   registerPress() {
     this.setState({
       registerCancelled: true
@@ -38,9 +45,13 @@ export default class Registration extends Component {
         phone_number: this.state.phone_number
       })
     })
+      .then(this.handleErrors)
       .then(response => response.json())
       .then(responseData => {
         console.log(responseData);
+      })
+      .catch(error => {
+        Alert.alert('Something went wrong please try again.');
       })
       .done();
   }
