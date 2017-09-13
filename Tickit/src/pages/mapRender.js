@@ -44,8 +44,8 @@ export default class DisplayLatLng extends React.Component {
       dateWheel: false,
       animating: true,
       login: false,
-      auth_token: this.props.auth_token,
-      register: false
+      register: false,
+      auth_token: this.props.auth_token
     };
     this.onDatePressed = this.onDatePressed.bind(this);
     this.onLoginPressed = this.onLoginPressed.bind(this);
