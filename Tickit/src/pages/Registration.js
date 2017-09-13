@@ -12,18 +12,18 @@ export default class Registration extends Component {
 
     this.state = {
       username: '',
-      last_name: '',
       email: '',
       password: '',
       plate_number: '',
-      plate_type: '',
-      plate_state: '',
-      company_name: '',
+      phone_number: '',
       registerCancelled: false
     };
   }
 
   registerPress() {
+    this.setState({
+      registerCancelled: true
+    });
     fetch('https://tickit-back-end.herokuapp.com/users', {
       method: 'POST',
       headers: {
@@ -32,13 +32,10 @@ export default class Registration extends Component {
       },
       body: JSON.stringify({
         username: this.state.username,
-        last_name: this.state.last_name,
         email: this.state.email,
         password: this.state.password,
         plate_number: this.state.plate_number,
-        plate_type: this.state.plate_type,
-        plate_state: this.state.plate_state,
-        company_name: this.state.company_name
+        phone_number: this.state.phone_number
       })
     })
       .then(response => response.json())
@@ -60,7 +57,7 @@ export default class Registration extends Component {
         <ScrollView style={styles.scroll}>
           <Heading text="Registration" />
           <Container>
-            <Label text="User Name" />
+            <Label text="Username" />
             <TextInput
               style={styles.textInput}
               autoCapitalize="none"
@@ -68,11 +65,19 @@ export default class Registration extends Component {
             />
           </Container>
           <Container>
-            <Label text="Last Name" />
+            <Label text="License Plate Number" />
             <TextInput
               autoCapitalize="none"
               style={styles.textInput}
-              onChangeText={text => this.setState({ last_name: text })}
+              onChangeText={text => this.setState({ plate_number: text })}
+            />
+          </Container>
+          <Container>
+            <Label text="Phone Number" />
+            <TextInput
+              autoCapitalize="none"
+              style={styles.textInput}
+              onChangeText={text => this.setState({ phone_number: text })}
             />
           </Container>
           <Container>
@@ -89,38 +94,6 @@ export default class Registration extends Component {
               secureTextEntry={true}
               style={styles.textInput}
               onChangeText={text => this.setState({ password: text })}
-            />
-          </Container>
-          <Container>
-            <Label text="Plate Number" />
-            <TextInput
-              autoCapitalize="none"
-              style={styles.textInput}
-              onChangeText={text => this.setState({ plate_number: text })}
-            />
-          </Container>
-          <Container>
-            <Label text="Plate Type" />
-            <TextInput
-              autoCapitalize="none"
-              style={styles.textInput}
-              onChangeText={text => this.setState({ plate_type: text })}
-            />
-          </Container>
-          <Container>
-            <Label text="Plate State" />
-            <TextInput
-              autoCapitalize="none"
-              style={styles.textInput}
-              onChangeText={text => this.setState({ plate_state: text })}
-            />
-          </Container>
-          <Container>
-            <Label text="Company *" />
-            <TextInput
-              autoCapitalize="none"
-              style={styles.textInput}
-              onChangeText={text => this.setState({ company_name: text })}
             />
           </Container>
           <View style={styles.footer}>
