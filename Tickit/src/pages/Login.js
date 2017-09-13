@@ -50,7 +50,7 @@ export default class Login extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
+        Alert.alert('Something went wrong please try again.');
       })
       .done();
   }
