@@ -68,7 +68,7 @@ export default class DisplayLatLng extends React.Component {
     });
   }
 
-  onCancelPressed(){
+  onCancelPressed() {
     this.setState({
       dateWheel: false
     });
@@ -223,32 +223,32 @@ export default class DisplayLatLng extends React.Component {
           />
         </View>
 
-            {this.state.dateWheel === true &&
-              <View>
-                <DatePickerIOS
-                  date={this.state.date}
-                  mode="date"
-                  style={styles.DatePickerIOS}
-                  timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
-                  onDateChange={this.onDateChange}
-                />
-              </View>
-            }
+        {this.state.dateWheel === true && (
+          <View>
+            <DatePickerIOS
+              date={this.state.date}
+              mode="date"
+              style={styles.DatePickerIOS}
+              timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
+              onDateChange={this.onDateChange}
+            />
+          </View>
+        )}
 
-            {this.state.dateWheel === true &&
-              <View style={styles.buttonContainer}>
-                <Button
-                  label="Confirm Location"
-                  styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
-                  onPress={async () => this.onSubmitPressed()}
-                />
-                <Button
-                  label="Cancel"
-                  styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
-                  onPress={async () => this.onCancelPressed()}
-                />
-              </View>
-            }
+        {this.state.dateWheel === true && (
+          <View style={styles.buttonContainer}>
+            <Button
+              label="Cancel"
+              styles={{ button: styles.button, label: styles.buttonWhiteText }}
+              onPress={async () => this.onCancelPressed()}
+            />
+            <Button
+              label="Submit"
+              styles={{ button: styles.button, label: styles.buttonWhiteText }}
+              onPress={async () => this.onSubmitPressed()}
+            />
+          </View>
+        )}
         {this.state.dateWheel === false && (
           <View style={styles.buttonContainer}>
             <Button
@@ -311,7 +311,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 5
+    marginHorizontal: 5,
+    backgroundColor: '#ff7700',
+    borderRadius: 8
   },
   buttonContainer: {
     flexDirection: 'row',
