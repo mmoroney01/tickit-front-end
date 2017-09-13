@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 18
+        padding: 18,
+        paddingHorizontal: 8
     }
 });
 

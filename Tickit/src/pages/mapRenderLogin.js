@@ -55,7 +55,7 @@ export default class DisplayLatLngLogIn extends React.Component {
     });
   }
 
-  onCancelPressed(){
+  onCancelPressed() {
     this.setState({
       dateWheel: false
     });
@@ -240,14 +240,14 @@ export default class DisplayLatLngLogIn extends React.Component {
         {this.state.dateWheel === true && (
           <View style={styles.buttonContainer}>
             <Button
-              label="Confirm Location"
-              styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
-              onPress={async () => this.onSubmitPressed()}
+              label="Cancel"
+              styles={{ button: styles.button, label: styles.buttonWhiteText }}
+              onPress={async () => this.onCancelPressed()}
             />
             <Button
-              label="Cancel"
-              styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
-              onPress={async () => this.onCancelPressed()}
+              label="Submit"
+              styles={{ button: styles.button, label: styles.buttonWhiteText }}
+              onPress={async () => this.onSubmitPressed()}
             />
           </View>
         )}
@@ -314,7 +314,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 5
+    marginHorizontal: 5,
+    backgroundColor: '#ff7700',
+    borderRadius: 8
   },
   buttonContainer: {
     flexDirection: 'row',
