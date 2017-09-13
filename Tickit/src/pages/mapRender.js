@@ -47,24 +47,14 @@ export default class DisplayLatLng extends React.Component {
       auth_token: this.props.auth_token,
       register: false
     };
-    this.onSubmitPressed = this.onSubmitPressed.bind(this);
-    this.onDateChange = this.onDateChange.bind(this);
     this.onDatePressed = this.onDatePressed.bind(this);
     this.onLoginPressed = this.onLoginPressed.bind(this);
     this.onRegisterPressed = this.onRegisterPressed.bind(this);
-    this.onLogOutPressed = this.onLogOutPressed.bind(this);
-    this.onCancelPressed = this.onCancelPressed.bind(this);
   }
 
   onLoginPressed() {
     this.setState({
       login: true
-    });
-  }
-
-  onLogOutPressed() {
-    this.setState({
-      loggedIn: false
     });
   }
 
@@ -223,32 +213,33 @@ export default class DisplayLatLng extends React.Component {
           />
         </View>
 
-            {this.state.dateWheel === true &&
-              <View>
-                <DatePickerIOS
-                  date={this.state.date}
-                  mode="date"
-                  style={styles.DatePickerIOS}
-                  timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
-                  onDateChange={this.onDateChange}
-                />
-              </View>
-            }
+        {this.state.dateWheel === true &&
+          <View>
+            <DatePickerIOS
+              date={this.state.date}
+              mode="date"
+              style={styles.DatePickerIOS}
+              timeZoneOffsetInMinutes={this.state.timeZoneOffsetInHours * 60}
+              onDateChange={this.onDateChange}
+            />
+          </View>
+        }
 
-            {this.state.dateWheel === true &&
-              <View style={styles.buttonContainer}>
-                <Button
-                  label="Confirm Location"
-                  styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
-                  onPress={async () => this.onSubmitPressed()}
-                />
-                <Button
-                  label="Cancel"
-                  styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
-                  onPress={async () => this.onCancelPressed()}
-                />
-              </View>
-            }
+        {this.state.dateWheel === true &&
+          <View style={styles.buttonContainer}>
+            <Button
+              label="Confirm Location"
+              styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
+              onPress={async () => this.onSubmitPressed()}
+            />
+            <Button
+              label="Cancel"
+              styles={{ button: styles.primaryButton, label: styles.buttonWhiteText }}
+              onPress={async () => this.onCancelPressed()}
+            />
+          </View>
+        }
+
         {this.state.dateWheel === false && (
           <View style={styles.buttonContainer}>
             <Button
