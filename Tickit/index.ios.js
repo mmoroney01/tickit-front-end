@@ -39,9 +39,11 @@ export default class Tickit extends Component {
     if(this.state.agreed === false){
       return(
         <View>
-          <View style={styles.textContainer}>
+          <View style={styles.termsContainer}>
             <Text style={styles.terms}>TERMS AND CONDITIONS</Text>
-            <Text>
+          </View>
+          <View style={styles.disclaimerContainer}>
+            <Text style={styles.disclaimer}>
             Tick!t, 2017. As a condition of use, you (hereafter "the user") shall not bring to bear legal action of any sort upon the developers of Tick!t (hereafter "the devs"). Tick!t claims no responsibility for loss of money and/or bodily autonomy incurred by the receipt of parking tickets as a result of user failure to comply with local laws and/or ordinances.</Text>
           </View>
 
@@ -76,21 +78,33 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
       position: 'absolute',
-      top: 230,
+      top: 420,
       left: 50,
       right: 50,
       bottom: 50,
     },
-    textContainer: {
+    disclaimer: {
+      color: 'orange',
+      fontSize: 19
+    },
+    disclaimerContainer: {
       position: 'absolute',
-      top: 50,
+      top: 140,
+      left: 50,
+      right: 50,
+      bottom: 50,
+    },
+    termsContainer: {
+      position: 'absolute',
+      top: 100,
       left: 50,
       right: 50,
       bottom: 50,
       alignItems: 'center',
     },
     terms: {
-      fontSize: 20,
+      color: 'orange',
+      fontSize: 21,
     }
 });
 
