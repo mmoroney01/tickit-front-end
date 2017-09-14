@@ -38,14 +38,20 @@ export default class Tickit extends Component {
   render() {
     if(this.state.agreed === false){
       return(
-        <View style={styles.buttonContainer}>
-                <Text>TERMS AND CONDITIONS</Text>
-                <Text>Tick!t, 2017. As a condition of use, you (hereafter "the user") shall not bring to bear legal action of any sort upon the developers of Tick!t (hereafter "the devs"). Tick!t claims no responsibility for loss of money and/or bodily autonomy incurred by the receipt of parking tickets as a result of user failure to comply with local laws and/or ordinances.</Text>
-                <Button
-                  label="Accept"
-                  styles={{ button: styles.button, label: styles.buttonWhiteText }}
-                  onPress={async () => this.onAgreeClick()}
-                />
+        <View>
+          <View style={styles.textContainer}>
+            <Text style={styles.terms}>TERMS AND CONDITIONS</Text>
+            <Text>
+            Tick!t, 2017. As a condition of use, you (hereafter "the user") shall not bring to bear legal action of any sort upon the developers of Tick!t (hereafter "the devs"). Tick!t claims no responsibility for loss of money and/or bodily autonomy incurred by the receipt of parking tickets as a result of user failure to comply with local laws and/or ordinances.</Text>
+          </View>
+
+          <View style={styles.buttonContainer}>
+              <Button
+                label="Accept"
+                styles={{ button: styles.button, label: styles.buttonWhiteText }}
+                onPress={async () => this.onAgreeClick()}
+              />
+           </View>
          </View>
       );
     }
@@ -58,7 +64,9 @@ export default class Tickit extends Component {
 
 const styles = StyleSheet.create({
   button: {
-      width: 100,
+      position: 'absolute',
+      left: 50,
+      right: 50,
       paddingHorizontal: 8,
       alignItems: 'center',
       justifyContent: 'center',
@@ -66,6 +74,24 @@ const styles = StyleSheet.create({
       backgroundColor: '#ff7700',
       borderRadius: 8
     },
+    buttonContainer: {
+      position: 'absolute',
+      top: 230,
+      left: 50,
+      right: 50,
+      bottom: 50,
+    },
+    textContainer: {
+      position: 'absolute',
+      top: 50,
+      left: 50,
+      right: 50,
+      bottom: 50,
+      alignItems: 'center',
+    },
+    terms: {
+      fontSize: 20,
+    }
 });
 
 AppRegistry.registerComponent('Tickit', () => Tickit);
