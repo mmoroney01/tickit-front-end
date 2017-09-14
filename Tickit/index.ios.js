@@ -79,24 +79,28 @@ const styles = StyleSheet.create({
     buttonContainer: {
       position: 'absolute',
       top: 420,
-      left: 50,
-      right: 50,
+      left: 60,
+      right: 60,
       bottom: 50,
+    },
+    buttonWhiteText: {
+    fontSize: 20,
+    color: '#FFF'
     },
     disclaimer: {
       color: 'orange',
-      fontSize: 19
+      fontSize: 15
     },
     disclaimerContainer: {
       position: 'absolute',
-      top: 140,
-      left: 50,
-      right: 50,
+      top: 200,
+      left: 60,
+      right: 60,
       bottom: 50,
     },
     termsContainer: {
       position: 'absolute',
-      top: 100,
+      top: 140,
       left: 50,
       right: 50,
       bottom: 50,
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
     },
     terms: {
       color: 'orange',
-      fontSize: 21,
+      fontSize: 23,
     }
 });
 
